@@ -10,6 +10,21 @@ const allProjects = await getCollection('projects');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Axomiya Indie | Projects</title>
     <meta name="description" content="Building for Assam, for the Future. A list of my projects." />
+    
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://axomiyaindie.github.io/" />
+    <meta property="og:title" content="Axomiya Indie | Building for Assam" />
+    <meta property="og:description" content="Independent developer building AI-first tools and education platforms." />
+    <meta property="og:image" content="https://axomiyaindie.github.io/og-image.png" />
+
+    <!-- Twitter / X -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://axomiyaindie.github.io/" />
+    <meta property="twitter:title" content="Axomiya Indie | Building for Assam" />
+    <meta property="twitter:description" content="Independent developer building AI-first tools and education platforms." />
+    <meta property="twitter:image" content="https://axomiyaindie.github.io/og-image.png" />
+
     <style is:global>
       :root {
         --bg: #09090b;
@@ -30,6 +45,8 @@ const allProjects = await getCollection('projects');
         line-height: 1.6;
       }
       .container { max-width: 900px; margin: 0 auto; padding: 2rem; flex: 1; width: 100%; }
+      
+      /* Bilingual Toggle Logic */
       .en-text, .as-text { transition: opacity 0.3s ease; }
       .as-text { display: none; }
       body.lang-as .en-text { display: none; }
@@ -37,12 +54,27 @@ const allProjects = await getCollection('projects');
       span.as-text { display: none; }
       body.lang-as span.en-text { display: none; }
       body.lang-as span.as-text { display: inline; }
+      
+      /* Project Card Hover */
       .project-card:hover {
         border-color: var(--accent) !important;
         transform: translateY(-4px);
         box-shadow: 0 10px 30px -10px var(--accent-glow);
       }
       .project-card:hover .glow { opacity: 1 !important; }
+
+      /* Social Icon Hover */
+      .social-icon {
+        transition: all 0.3s ease;
+        opacity: 0.7;
+      }
+      .social-icon:hover {
+        opacity: 1;
+        transform: translateY(-3px) scale(1.1);
+        filter: drop-shadow(0 0 8px var(--accent));
+      }
+      .social-icon:hover img[alt="LinkedIn"] { content: url("https://cdn.simpleicons.org/linkedin/0077B5"); }
+      .social-icon:hover img[alt="X"] { content: url("https://cdn.simpleicons.org/x/ffffff"); }
     </style>
   </head>
   <body>
@@ -94,14 +126,24 @@ const allProjects = await getCollection('projects');
     </main>
 
     <footer style="border-top: 1px solid var(--card-border); padding: 2rem; text-align: center; color: var(--text-muted); margin-top: auto;">
-      <p style="margin-bottom: 1rem;">
+      <p style="margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
         <span class="en-text">Using AI and technology to ensure every mind in Assam has equal access to knowledge.</span>
         <span class="as-text">AI আৰু টেকৰ জৰিয়তে অসমত সকলোলৈ সমানভাৱে তথ্য পোহৰাবলৈ কাম কৰি আছোঁ।</span>
       </p>
-      <div style="display: flex; justify-content: center; gap: 1.5rem;">
-        <a href="https://github.com/axomiyaindie" style="color: var(--text-main); text-decoration: none;">GitHub</a>
-        <a href="https://www.linkedin.com/in/axomiyaindie/" style="color: var(--text-main); text-decoration: none;">LinkedIn</a>
-        <a href="https://x.com/AxomiyaIndie" style="color: var(--text-main); text-decoration: none;">X (Twitter)</a>
+      
+      <div style="display: flex; justify-content: center; gap: 2rem; align-items: center;">
+        <a href="https://github.com/axomiyaindie" target="_blank" rel="noopener" class="social-icon" title="GitHub">
+          <img src="https://cdn.simpleicons.org/github/f4f4f5" alt="GitHub" width="28" height="28" />
+        </a>
+        <a href="https://www.linkedin.com/in/axomiyaindie/" target="_blank" rel="noopener" class="social-icon" title="LinkedIn">
+          <img src="https://cdn.simpleicons.org/linkedin/f4f4f5" alt="LinkedIn" width="28" height="28" />
+        </a>
+        <a href="https://x.com/AxomiyaIndie" target="_blank" rel="noopener" class="social-icon" title="X (Twitter)">
+          <img src="https://cdn.simpleicons.org/x/f4f4f5" alt="X" width="28" height="28" />
+        </a>
+        <a href="https://www.facebook.com/share/17gMFEg3Y6/" target="_blank" rel="noopener" class="social-icon" title="Facebook">
+          <img src="https://cdn.simpleicons.org/facebook/f4f4f5" alt="Facebook" width="28" height="28" />
+        </a>
       </div>
     </footer>
 
