@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const blogs = await getCollection('blog');
+  return blogs.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Axomiya Indie`}>
+  <article style="max-width: 800px; margin: 0 auto; padding-top: 2rem;">
+    <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">
+      <span class="en-text">← Back to Home</span>
+      <span class="as-text">← ঘৰলৈ ঘূৰি যাওক</span>
+    </a>
+
+    <header style="margin-top: 2rem; margin-bottom: 3rem;">
+      <h1 style="margin: 0 0 1rem 0; font-size: 2.5rem; line-height: 1.2;">
+        <span class="en-text">{post.data.title}</span>
+        <span class="as-text">{post.data.title_as}</span>
+      </h1>
+      <p style="margin: 0; color: var(--text-muted); font-size: 1.1rem;">
+        <span class="en-text">{post.data.description}</span>
+        <span class="as-text">{post.data.description_as}</span>
+      </p>
+    </header>
+
+    <div class="prose" style="color: var(--text-main); line-height: 1.8;">
+      <Content />
+    </div>
+
+    {post.data.link && (
+      <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--card-border);">
+        <a
+          href={post.data.link}
+          target="_blank"
+          rel="noopener"
+          style="color: var(--accent); text-decoration: underline;"
+        >
+          <span class="en-text">External link →</span>
+          <span class="as-text">বাহ্যিক লিংক →</span>
+        </a>
+      </div>
+    )}
+  </article>
+
+  <style is:global>
+    .prose h1, .prose h2, .prose h3 { color: var(--text-main); margin-top: 2rem; margin-bottom: 1rem; }
+    .prose p { margin-bottom: 1rem; }
+    .prose a { color: var(--accent); text-decoration: underline; }
+    .prose code { background: var(--card-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    .prose pre { background: var(--card-bg); padding: 1rem; border-radius: 8px; overflow-x: auto; }
+    .prose ul, .prose ol { margin-bottom: 1rem; padding-left: 2rem; }
+    .prose img { max-width: 100%; border-radius: 8px; }
+    .prose blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; color: var(--text-muted); font-style: italic; }
+  </style>
+</Layout>
