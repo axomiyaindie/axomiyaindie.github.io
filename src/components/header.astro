@@ -1,14 +1,28 @@
 ﻿---
 ---
-<header style="border-bottom: 1px solid var(--card-border); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(10px); z-index: 100;">
-  <div style="display: flex; align-items: center; gap: 1rem;">
-    <a href="/" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">
-      <img src="/logo.png" alt="Axomiya Indie Logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent);" />
-      <h1 style="margin: 0; font-size: 1.5rem; letter-spacing: -0.5px; background: linear-gradient(90deg, #00E1FF, #7C4DFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Axomiya Indie</h1>
+<header style="position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--card-border); background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+  <div style="max-width: 960px; margin: 0 auto; padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+    <!-- Logo + Name (links to Home) -->
+    <a href="/" style="display: flex; align-items: center; gap: 0.65rem; text-decoration: none; flex-shrink: 0;">
+      <img src="/logo.png" alt="Axomiya Indie" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent);" />
+      <span style="font-size: clamp(1rem, 3vw, 1.2rem); font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(90deg, #00E1FF, #7C4DFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; white-space: nowrap;">Axomiya Indie</span>
     </a>
+
+    <!-- Nav + Toggle -->
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <nav style="display: flex; gap: 1rem; align-items: center;">
+        <a href="/projects" style="color: var(--text-main); text-decoration: none; font-size: 0.9rem; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity=1;this.style.color='var(--accent)'" onmouseout="this.style.opacity=0.85;this.style.color='var(--text-main)'">
+          <span class="en-text">Projects</span><span class="as-text">প্ৰকল্প</span>
+        </a>
+        <a href="/blog" style="color: var(--text-main); text-decoration: none; font-size: 0.9rem; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity=1;this.style.color='var(--accent)'" onmouseout="this.style.opacity=0.85;this.style.color='var(--text-main)'">
+          <span class="en-text">Blog</span><span class="as-text">ব্লগ</span>
+        </a>
+      </nav>
+
+      <button id="lang-toggle" style="background: transparent; color: var(--text-main); border: 1px solid var(--card-border); padding: 0.4rem 0.8rem; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.8rem; white-space: nowrap;">
+        <span class="en-text">অসমীয়া</span>
+        <span class="as-text">English</span>
+      </button>
+    </div>
   </div>
-  <button id="lang-toggle" style="background: transparent; color: var(--text-main); border: 1px solid var(--card-border); padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.2s;">
-    <span class="en-text">🇮🇳 অসমীয়া</span>
-    <span class="as-text">🇬🇧 English</span>
-  </button>
 </header>
