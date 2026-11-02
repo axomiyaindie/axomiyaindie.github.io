@@ -9,8 +9,19 @@ const projects = defineCollection({
     description: z.string(),
     description_as: z.string(),
     link: z.string().url(),
-    logo: z.string(),   // <-- new field
+    logo: z.string(),
   }),
 });
 
-export const collections = { projects };
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    title_as: z.string(),
+    description: z.string(),
+    description_as: z.string(),
+    link: z.string().url().optional(),
+  }),
+});
+
+export const collections = { projects, blog };
