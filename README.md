@@ -1,9 +1,10 @@
+```markdown
 # Axomiya Indie Portfolio
 
 > **Building for Assam, for the Future.** 
 > An independent developer's portfolio and blog, built to make high-quality information universally accessible in Assamese and English.
 
-## 🚀 Features
+## Features
 
 - **Bilingual (English / Assamese):** One-click language toggle.
 - **Dynamic Content:** Projects and blog posts are generated from Markdown files (`src/content/`).
@@ -13,14 +14,14 @@
 - **SEO & Social Sharing:** Dynamic Open Graph images for every project and blog post.
 - **CI/CD:** Automatic deployment to GitHub Pages on every push.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Framework:** [Astro](https://astro.build/)
 - **Styling:** Vanilla CSS (Mobile-first, CSS Variables)
 - **Font:** Inter (via Google Fonts)
 - **Deployment:** GitHub Pages + GitHub Actions
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 /
@@ -35,3 +36,41 @@
 │   ├── styles/          # Global CSS variables and typography
 │   └── utils/           # Shared logic (e.g., date formatting)
 └── package.json
+```
+
+## How to Add Content
+
+**To add a new Blog Post:**
+1. Create a file in `src/content/blog/` named `DD-MM-YY-title.md`.
+2. Add the frontmatter (`title`, `title_as`, `description`, `description_as`, `image`).
+3. Add your cover image to `public/blog/`.
+4. Write your content below the `---`.
+5. Push to GitHub.
+
+**To add a new Project:**
+1. Create a file in `src/content/projects/` named `project-name.md`.
+2. Add the frontmatter (`title`, `title_as`, `description`, `description_as`, `link`, `logo`).
+3. Add the logo to `public/projects/`.
+4. Push to GitHub.
+
+## Commands
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `pnpm install`            | Installs dependencies                            |
+| `pnpm run dev`            | Starts local dev server at `localhost:4321`      |
+| `pnpm run build`          | Build your production site to `./dist/`          |
+| `pnpm run preview`        | Preview your build locally, before deploying     |
+
+## Connect
+
+- **Website:** [axomiyaindie.github.io](https://axomiyaindie.github.io)
+- **GitHub:** [@axomiyaindie](https://github.com/axomiyaindie)
+- **X (Twitter):** [@AxomiyaIndie](https://x.com/AxomiyaIndie)
+```
+
+### Build and Push
+
+Since `README.md` isn't part of the site build, you can just commit and push:
+
+```powershell
