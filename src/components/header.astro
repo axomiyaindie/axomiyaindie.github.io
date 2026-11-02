@@ -3,8 +3,26 @@ export interface Props {
   lang?: string;
 }
 const { lang = 'en' } = Astro.props;
+
 const prefix = lang === 'as' ? '/as' : '';
-const toggleHref = lang === 'as' ? '/' : '/as/';
+
+// Smart language toggle: computes the SAME page in the other language
+let currentPath = Astro.url.pathname;
+
+let toggleHref = '/';
+if (lang === 'en') {
+  // English → Assamese: add /as to the start of the current path
+  toggleHref = `/as${currentPath}`;
+} else {
+  // Assamese → English: strip /as from the start of the current path
+  toggleHref = currentPath.replace(/^\/as/, '') || '/';
+}
+
+// Ensure trailing slash for consistency
+if (!toggleHref.endsWith('/') && !toggleHref.includes('.')) {
+  toggleHref += '/';
+}
+
 const toggleLabel = lang === 'as' ? 'English' : 'অসমীয়া';
 ---
 <header style="position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--card-border); background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
@@ -19,15 +37,15 @@ const toggleLabel = lang === 'as' ? 'English' : 'অসমীয়া';
     <!-- Nav + Toggle -->
     <div style="display: flex; align-items: center; gap: 1.5rem;">
       <nav style="display: flex; gap: 1.5rem; align-items: center;">
-        <a href={`${prefix}/projects`} style="color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.2s;">
+        <a href={`${prefix}/projects/`} style="color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.2s;">
           {lang === 'as' ? 'প্ৰকল্প' : 'Projects'}
         </a>
-        <a href={`${prefix}/blog`} style="color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.2s;">
+        <a href={`${prefix}/blog/`} style="color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.2s;">
           {lang === 'as' ? 'ব্লগ' : 'Blog'}
         </a>
       </nav>
 
-      <!-- Language Switch Link -->
+      <!-- Smart Language Switch Link -->
       <a href={toggleHref} style="background: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem; white-space: nowrap; transition: background 0.2s; text-decoration: none; display: inline-block;">
         {toggleLabel}
       </a>
