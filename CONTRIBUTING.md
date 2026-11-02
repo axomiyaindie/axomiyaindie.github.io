@@ -302,4 +302,6 @@ We're here to help. Every contribution, no matter how small, makes this project 
 
 ---
 
+**A note from the owner:** I'm not a professional blogger or an experienced open-source maintainer, so contributions are highly welcome. If you spot a mistake, want to report it, or want to contribute, please do. This is not a business, just a personal project, and every suggestion is highly welcome.
+
 *This project is small and made with love. Thank you for reading this far.* 🙏
