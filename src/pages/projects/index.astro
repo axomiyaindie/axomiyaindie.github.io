@@ -4,29 +4,28 @@ import { getCollection } from 'astro:content';
 const allProjects = (await getCollection('projects')).sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 <Layout title="All Projects | Axomiya Indie">
-  <section style="padding: 2rem 0 3rem 0; text-align: center;">
-    <h1 style="font-size: clamp(2rem, 5vw, 2.8rem); margin: 0 0 0.75rem 0; font-weight: 800; letter-spacing: -0.5px;">
+  <section style="padding: 4rem 0 3rem 0;">
+    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">
       <span class="en-text">All Projects</span>
       <span class="as-text">সকলো প্ৰকল্প</span>
     </h1>
-    <p style="color: var(--text-muted); margin: 0;">
+    <p style="color: var(--text-muted); margin: 0; font-size: 1.1rem;">
       <span class="en-text">Everything I've built so far.</span>
       <span class="as-text">মই এতিয়ালৈকে নিৰ্মাণ কৰা সকলো।</span>
     </p>
   </section>
 
-  <div style="display: grid; gap: 1rem;">
+  <div style="display: grid; gap: 1.5rem;">
     {allProjects.map((project) => (
-      <a href={`/projects/${project.id}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.25rem; text-decoration: none; color: inherit; position: relative; overflow: hidden;">
-        <div style="position: absolute; inset: 0; background: radial-gradient(circle at top right, var(--accent-glow), transparent 60%); opacity: 0; transition: opacity 0.3s;" class="glow"></div>
-        <div style="position: relative; display: flex; gap: 1rem; align-items: center;">
-          <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 56px; height: 56px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); background: #0d0d10; flex-shrink: 0;" />
+      <a href={`/projects/${project.id}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+        <div style="display: flex; gap: 1.5rem; align-items: center;">
+          <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); flex-shrink: 0;" />
           <div style="flex: 1; min-width: 0;">
-            <h3 style="margin: 0 0 0.25rem 0; font-size: clamp(1.05rem, 2.5vw, 1.25rem); font-weight: 700;">
+            <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">
               <span class="en-text">{project.data.title}</span>
               <span class="as-text">{project.data.title_as}</span>
             </h3>
-            <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+            <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">
               <span class="en-text">{project.data.description}</span>
               <span class="as-text">{project.data.description_as}</span>
             </p>

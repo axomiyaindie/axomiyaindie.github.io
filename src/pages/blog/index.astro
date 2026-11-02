@@ -4,29 +4,28 @@ import { getCollection } from 'astro:content';
 const allBlogs = (await getCollection('blog')).sort((a, b) => b.id.localeCompare(a.id));
 ---
 <Layout title="All Blog Posts | Axomiya Indie">
-  <section style="padding: 2rem 0 3rem 0; text-align: center;">
-    <h1 style="font-size: clamp(2rem, 5vw, 2.8rem); margin: 0 0 0.75rem 0; font-weight: 800; letter-spacing: -0.5px;">
+  <section style="padding: 4rem 0 3rem 0;">
+    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">
       <span class="en-text">All Writing</span>
       <span class="as-text">সকলো লিখনি</span>
     </h1>
-    <p style="color: var(--text-muted); margin: 0;">
+    <p style="color: var(--text-muted); margin: 0; font-size: 1.1rem;">
       <span class="en-text">Thoughts, tutorials, and updates.</span>
       <span class="as-text">চিন্তা, টিউটোৰিয়েল, আৰু আপডেট।</span>
     </p>
   </section>
 
-  <div style="display: grid; gap: 1rem;">
+  <div style="display: grid; gap: 1.5rem;">
     {allBlogs.map((post) => (
-      <a href={`/blog/${post.id}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.25rem; text-decoration: none; color: inherit; position: relative; overflow: hidden;">
-        <div style="position: absolute; inset: 0; background: radial-gradient(circle at top right, var(--accent-glow), transparent 60%); opacity: 0; transition: opacity 0.3s;" class="glow"></div>
-        <div style="position: relative; display: flex; flex-direction: column; gap: 0.75rem;">
-          <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 10px; border: 1px solid var(--card-border);" />
+      <a href={`/blog/${post.id}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px;" />
           <div>
-            <h3 style="margin: 0 0 0.25rem 0; font-size: clamp(1.05rem, 2.5vw, 1.25rem); font-weight: 700;">
+            <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">
               <span class="en-text">{post.data.title}</span>
               <span class="as-text">{post.data.title_as}</span>
             </h3>
-            <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+            <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">
               <span class="en-text">{post.data.description}</span>
               <span class="as-text">{post.data.description_as}</span>
             </p>

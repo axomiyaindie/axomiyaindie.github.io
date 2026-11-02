@@ -25,43 +25,45 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
 ---
 
 <Layout title="Axomiya Indie">
-  <!-- Hero -->
-  <section style="padding: 2rem 0 4rem 0; text-align: center;">
-    <h1 style="font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin: 0 0 1.25rem 0; background: linear-gradient(135deg, #00E1FF 0%, #7C4DFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+  <!-- Meta-style Editorial Hero -->
+  <section style="padding: 4rem 0 5rem 0; text-align: left; max-width: 800px;">
+    <p style="color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
+      Latest Updates
+    </p>
+    <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin: 0 0 1.5rem 0; color: var(--text-main);">
       <span class="en-text">Building for Assam,<br/>for the Future.</span>
       <span class="as-text">অসমৰ বাবে,<br/>ভৱিষ্যতৰ বাবে।</span>
     </h1>
-    <p style="color: var(--text-muted); font-size: clamp(1rem, 2.5vw, 1.2rem); max-width: 560px; margin: 0 auto; line-height: 1.6;">
+    <p style="color: var(--text-muted); font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin: 0; line-height: 1.6; max-width: 600px;">
       <span class="en-text">Independent developer building AI-first tools and education platforms for the people of Assam.</span>
       <span class="as-text">অসমৰ ৰাইজৰ বাবে AI-চালিত সঁজুলি আৰু শৈক্ষিক প্লেটফৰ্ম নিৰ্মাণ কৰা এজন স্বতন্ত্ৰ ডেভেলপাৰ।</span>
     </p>
   </section>
 
   <!-- Latest Projects -->
-  <section style="margin-bottom: 4rem;">
+  <section style="margin-bottom: 5rem;">
     <div class="section-heading">
       <h2>
         <span class="en-text">Latest Projects</span>
         <span class="as-text">শেহতীয়া প্ৰকল্প</span>
       </h2>
-      <a href="/projects" style="color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 600;">
+      <a href="/projects" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">
         <span class="en-text">See all →</span>
         <span class="as-text">সকলো →</span>
       </a>
     </div>
 
-    <div style="display: grid; gap: 1rem;">
+    <div style="display: grid; gap: 1.5rem;">
       {latestProjects.map((project) => (
-        <a href={`/projects/${project.id}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.25rem; text-decoration: none; color: inherit; position: relative; overflow: hidden;">
-          <div style="position: absolute; inset: 0; background: radial-gradient(circle at top right, var(--accent-glow), transparent 60%); opacity: 0; transition: opacity 0.3s;" class="glow"></div>
-          <div style="position: relative; display: flex; gap: 1rem; align-items: center;">
-            <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 56px; height: 56px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); background: #0d0d10; flex-shrink: 0;" />
+        <a href={`/projects/${project.id}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="display: flex; gap: 1.5rem; align-items: center;">
+            <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); flex-shrink: 0;" />
             <div style="flex: 1; min-width: 0;">
-              <h3 style="margin: 0 0 0.25rem 0; font-size: clamp(1.05rem, 2.5vw, 1.25rem); font-weight: 700;">
+              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">
                 <span class="en-text">{project.data.title}</span>
                 <span class="as-text">{project.data.title_as}</span>
               </h3>
-              <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">
                 <span class="en-text">{project.data.description}</span>
                 <span class="as-text">{project.data.description_as}</span>
               </p>
@@ -79,24 +81,23 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
         <span class="en-text">Latest Writing</span>
         <span class="as-text">শেহতীয়া লিখনি</span>
       </h2>
-      <a href="/blog" style="color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 600;">
+      <a href="/blog" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">
         <span class="en-text">See all →</span>
         <span class="as-text">সকলো →</span>
       </a>
     </div>
 
-    <div style="display: grid; gap: 1rem;">
+    <div style="display: grid; gap: 1.5rem;">
       {latestBlogs.map((post) => (
-        <a href={`/blog/${post.id}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.25rem; text-decoration: none; color: inherit; position: relative; overflow: hidden;">
-          <div style="position: absolute; inset: 0; background: radial-gradient(circle at top right, var(--accent-glow), transparent 60%); opacity: 0; transition: opacity 0.3s;" class="glow"></div>
-          <div style="position: relative; display: flex; flex-direction: column; gap: 0.75rem;">
-            <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 10px; border: 1px solid var(--card-border);" />
+        <a href={`/blog/${post.id}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px;" />
             <div>
-              <h3 style="margin: 0 0 0.25rem 0; font-size: clamp(1.05rem, 2.5vw, 1.25rem); font-weight: 700;">
+              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">
                 <span class="en-text">{post.data.title}</span>
                 <span class="as-text">{post.data.title_as}</span>
               </h3>
-              <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">
                 <span class="en-text">{post.data.description}</span>
                 <span class="as-text">{post.data.description_as}</span>
               </p>
@@ -107,8 +108,7 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
     </div>
   </section>
 
-  <!-- Footer note -->
-  <div style="text-align: center; margin-top: 4rem; padding-top: 1.5rem; border-top: 1px dashed var(--card-border); font-size: 0.8rem; color: var(--text-muted);">
+  <div style="text-align: center; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--card-border); font-size: 0.9rem; color: var(--text-muted);">
     <span class="en-text">Site last updated: </span>
     <span class="as-text">শেষ আপডেট: </span>
     <strong style="color: var(--text-main);">{siteLastUpdated}</strong>
