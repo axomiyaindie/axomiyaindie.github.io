@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/layout.astro';
+---
+
+<Layout 
+  title="About | Axomiya Indie" 
+  description="Independent developer building AI-first tools and education platforms for Assam."
+>
+  <article style="max-width: 800px; margin: 0 auto; padding: 4rem 0;">
+    
+    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1.5rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">
+      <span class="en-text">About Me</span>
+      <span class="as-text">মোৰ বিষয়ে</span>
+    </h1>
+
+    <div class="prose" style="color: var(--text-main); font-size: 1.1rem; line-height: 1.8;">
+      <p>
+        <span class="en-text">I am an independent developer based in Assam, building AI-first tools and education platforms. My mission is simple: remove language, location, and resource barriers using technology.</span>
+        <span class="as-text">মই অসমত বাস কৰা এজন স্বতন্ত্ৰ ডেভেলপাৰ, যিয়ে AI-চালিত সঁজুলি আৰু শৈক্ষিক প্লেটফৰ্ম নিৰ্মাণ কৰি আছোঁ। মোৰ লক্ষ্য সহজ: প্ৰযুক্তি ব্যৱহাৰ কৰি ভাষা, স্থান, আৰু সম্পদৰ বাধা দূৰ কৰা।</span>
+      </p>
+
+      <blockquote>
+        <span class="en-text">"Real output > empty talk. Code, not noise."</span>
+        <span class="as-text">"প্ৰকৃত ফলাফল > খালী কথা। ক'ড, মাত্ৰ শব্দ নহয়।"</span>
+      </blockquote>
+
+      <h2>
+        <span class="en-text">Connect with Me</span>
+        <span class="as-text">মোৰ সৈতে সংযোগ কৰক</span>
+      </h2>
+      <p>
+        <span class="en-text">Whether you want to collaborate, need help with a project, or just want to say hi, feel free to reach out on any of these platforms:</span>
+        <span class="as-text">আপুনি যদি সহযোগিতা কৰিব বিচাৰে, কোনো প্ৰকল্পত সহায়ৰ প্ৰয়োজন হয়, বা মাত্ৰ হাই ক'ব বিচাৰে, তেন্তে এই প্লেটফৰ্মসমূহৰ যিকোনো এটাত যোগাযোগ কৰিব পাৰে:</span>
+      </p>
+    </div>
+
+    <!-- Social Links Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem;">
+      
+      <!-- X / Twitter -->
+      <a href="https://x.com/AxomiyaIndie" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
+        <img src="/social/x.png" alt="X" style="width: 28px; height: 28px; filter: brightness(0);" />
+        <div>
+          <div style="font-weight: 700; color: var(--text-main);">X (Twitter)</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">@AxomiyaIndie</div>
+        </div>
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/axomiyaindie" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
+        <img src="/social/github.png" alt="GitHub" style="width: 28px; height: 28px; filter: brightness(0);" />
+        <div>
+          <div style="font-weight: 700; color: var(--text-main);">GitHub</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">@axomiyaindie</div>
+        </div>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/axomiyaindie/" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
+        <img src="/social/linkedin.png" alt="LinkedIn" style="width: 28px; height: 28px; filter: brightness(0);" />
+        <div>
+          <div style="font-weight: 700; color: var(--text-main);">LinkedIn</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Axomiya Indie</div>
+        </div>
+      </a>
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/share/17vMFEg3Y6/" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
+        <img src="/social/facebook.png" alt="Facebook" style="width: 28px; height: 28px; filter: brightness(0);" />
+        <div>
+          <div style="font-weight: 700; color: var(--text-main);">Facebook</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Axomiya Indie</div>
+        </div>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@axomiyaindie" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
+        <img src="/social/youtube.png" alt="YouTube" style="width: 28px; height: 28px; filter: brightness(0);" />
+        <div>
+          <div style="font-weight: 700; color: var(--text-main);">YouTube</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">@axomiyaindie</div>
+        </div>
+      </a>
+
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .social-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+</style>
