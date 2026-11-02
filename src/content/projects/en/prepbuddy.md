@@ -295,6 +295,6 @@ The production infrastructure runs on Render (API), Netlify (Web + Admin), Neon 
 
 ## Repository
 
-The full source is at [github.com/axomiyaindie/prepbuddy](https://github.com/axomiyaindie/prepbuddy).
+The full source is at [github.com/axomiyaindie/prepbuddyosf](https://github.com/axomiyaindie/prepbuddy).
 
 If you are building something similar — a structured monorepo EdTech product, a payment + payout system, or a Flutter app that shares a backend with a Next.js web product — I am happy to talk through what worked and what did not.

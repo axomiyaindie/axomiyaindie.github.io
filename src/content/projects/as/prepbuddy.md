@@ -295,6 +295,6 @@ Production অৱকাঠামো Render (API), Netlify (Web + Admin), Neon (�
 
 ## ৰিপজিটৰী
 
-সম্পূৰ্ণ source [github.com/axomiyaindie/prepbuddy](https://github.com/axomiyaindie/prepbuddy)-ত আছে।
+সম্পূৰ্ণ source [github.com/axomiyaindie/prepbuddyosf](https://github.com/axomiyaindie/prepbuddy)-ত আছে।
 
 যদি আপুনি একেধৰণৰ কিবা সাজিছে, যেনে গাঁথনিবদ্ধ monorepo EdTech প্ৰডাক্ট, পেমেণ্ট + পে-আউট ব্যৱস্থা, বা Next.js ৱেব প্ৰডাক্টৰ সৈতে একেটা backend ভাগ-বতৰা কৰা Flutter এপ, তেন্তে কি কাম কৰিলে আৰু কি নকৰিলে, সেয়া আলোচনা কৰিবলৈ মই সুখী।
