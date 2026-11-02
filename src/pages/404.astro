@@ -1,26 +1,50 @@
 ---
 import Layout from '../layouts/layout.astro';
+import { getCollection } from 'astro:content';
 
 const path = Astro.url.pathname;
 const isAssamese = path.startsWith('/as/');
 
-// Calculate the URL in the other language
-const otherLangPath = isAssamese 
-  ? path.replace(/^\/as/, '') || '/' 
-  : `/as${path}`;
+// Extract the slug from the URL
+const cleanPath = path.replace(/^\/as/, '').replace(/^\/|\/$/g, '');
+const parts = cleanPath.split('/');
 
-// UI Text based on language
+let otherLangPath: string | null = null;
+
+// Only try to find the counterpart if it's a detail page (blog/[slug] or projects/[slug])
+if (parts.length === 2 && (parts[0] === 'blog' || parts[0] === 'projects')) {
+  const [section, slug] = parts;
+  const otherLang = isAssamese ? 'en' : 'as';
+  
+  const otherLangCollection = await getCollection(section as 'blog' | 'projects', (p) => p.id === `${otherLang}/${slug}`);
+  
+  if (otherLangCollection.length > 0) {
+    otherLangPath = isAssamese ? `/${section}/${slug}/` : `/as/${section}/${slug}/`;
+  }
+}
+
+// UI Text
 const title = isAssamese ? 'পৃষ্ঠাটো পোৱা নগ’ল' : 'Page Not Found';
-const message = isAssamese 
-  ? 'এই পৃষ্ঠাটোৰ অসমীয়া সংস্কৰণ এতিয়াও উপলব্ধ নহয়।'
-  : 'This page is not available in English yet.';
-const subMessage = isAssamese
-  ? 'আপুনি ইংৰাজী সংস্কৰণত পঢ়িব পাৰে, বা আমাক অনুবাদ কৰাত সহায় কৰিব পাৰে।'
-  : 'You can view the Assamese version, or help us translate it on GitHub.';
-const btnOtherLang = isAssamese ? 'Read in English' : 'অসমীয়াত পঢ়ক (Read in Assamese)';
+const message = otherLangPath
+  ? (isAssamese 
+      ? 'এই পৃষ্ঠাটোৰ অসমীয়া সংস্কৰণ এতিয়াও উপলব্ধ নহয়।' 
+      : 'This page is not available in English yet.')
+  : (isAssamese
+      ? 'এই পৃষ্ঠাটো নাই।'
+      : 'This page does not exist.');
+const subMessage = otherLangPath
+  ? (isAssamese
+      ? 'আপুনি ইংৰাজী সংস্কৰণত পঢ়িব পাৰে, বা আমাক অনুবাদ কৰাত সহায় কৰিব পাৰে।'
+      : 'You can view the Assamese version, or help us translate it on GitHub.')
+  : (isAssamese
+      ? 'আপুনি ঘৰলৈ উভতি যাব পাৰে বা GitHub-ত সহায় কৰিব পাৰে।'
+      : 'You can go back home or help us on GitHub.');
+
+const btnOtherLang = otherLangPath
+  ? (isAssamese ? 'Read in English' : 'অসমীয়াত পঢ়ক (Read in Assamese)')
+  : null;
 const btnHome = isAssamese ? 'ঘৰলৈ যাওক (Home)' : 'Back to Home';
 
-// The GitHub link
 const repoUrl = "https://github.com/axomiyaindie/axomiyaindie.github.io";
 ---
 
@@ -32,28 +56,25 @@ const repoUrl = "https://github.com/axomiyaindie/axomiyaindie.github.io";
     <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem;">{subMessage}</p>
     
     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
-      <!-- Button to view the other language -->
-      <a href={otherLangPath} style="display: inline-block; background: var(--accent); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
-        {btnOtherLang}
-      </a>
+      {btnOtherLang && (
+        <a href={otherLangPath!} style="display: inline-block; background: var(--accent); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
+          {btnOtherLang}
+        </a>
+      )}
       
-      <!-- Button to go home -->
       <a href={isAssamese ? '/as/' : '/'} style="display: inline-block; background: #f0f2f5; color: var(--text-main); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
         {btnHome}
       </a>
     </div>
 
-    <!-- GitHub Contribution Section -->
     <div style="border-top: 1px solid var(--card-border); padding-top: 2rem; margin-top: 2rem;">
       <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
         {isAssamese 
           ? "আমাক অনুবাদ কৰাত সহায় কৰক, অৱদান আগবঢ়াওক, বা কোনো ভুল ধৰা পেলালে জনাওক।" 
           : "Help us translate this page, contribute, or report any mistakes."}
       </p>
-      <a href={repoUrl} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-main); text-decoration: none; font-weight: 600; background: #f0f2f5; padding: 0.6rem 1.2rem; border-radius: 8px; transition: background 0.2s;" onmouseover="this.style.background='#e4e6eb'" onmouseout="this.style.background='#f0f2f5'">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-        </svg>
+      <a href={repoUrl} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.75rem; color: var(--text-main); text-decoration: none; font-weight: 600; background: #f0f2f5; padding: 0.6rem 1.2rem; border-radius: 8px; transition: background 0.2s;" onmouseover="this.style.background='#e4e6eb'" onmouseout="this.style.background='#f0f2f5'">
+        <img src="/social/github.png" alt="GitHub" style="width: 20px; height: 20px; filter: brightness(0);" />
         View Repository on GitHub
       </a>
     </div>
