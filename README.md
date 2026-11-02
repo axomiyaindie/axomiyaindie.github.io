@@ -1,4 +1,4 @@
-# Axomiya Indie Portfolio
+# Axomiya Indie
 
 > **Building for Assam, for the Future.** 
 > An independent developer's portfolio and blog, built to make high-quality information universally accessible in Assamese and English.
