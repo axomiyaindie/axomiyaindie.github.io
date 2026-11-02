@@ -25,9 +25,15 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const dates = getFileDates(project.id);
 const isUpdated = dates.published !== dates.updated;
+const slug = project.id.replace('as/', '');
 ---
 
-<Layout title={`${project.data.title} | Axomiya Indie`} lang="as">
+<Layout 
+  title={`${project.data.title} | Axomiya Indie`} 
+  description={project.data.description}
+  image={`https://axomiyaindie.github.io/og/projects/${slug}.png`}
+  lang="as"
+>
   <article class="max-w-[800px] mx-auto py-8">
     <a href="/as/projects" class="text-text-muted no-underline text-sm inline-block mb-8 hover:text-meta-blue transition-colors">← সকলো প্ৰকল্প</a>
 
@@ -45,7 +51,6 @@ const isUpdated = dates.published !== dates.updated;
       </div>
     </header>
 
-    <!-- Single date badge -->
     <div class="flex gap-3 flex-wrap mb-10 text-sm">
       {isUpdated ? (
         <span class="text-text-muted bg-gray-100 px-3 py-1.5 rounded-full font-semibold">

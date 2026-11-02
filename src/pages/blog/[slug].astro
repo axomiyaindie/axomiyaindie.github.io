@@ -24,22 +24,25 @@ function getFileDates(id: string) {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const dates = getFileDates(post.id);
-const headerImage = post.data.image || '/blog/default-blog.png';
+const headerImage = post.data.image;
 const isUpdated = dates.published !== dates.updated;
+const slug = post.id.replace('en/', '');
 ---
 
 <Layout 
   title={`${post.data.title} | Axomiya Indie`} 
   description={post.data.description}
-  image={`https://axomiyaindie.github.io${headerImage}`}
+  image={`https://axomiyaindie.github.io/og/blog/${slug}.png`}
   lang="en"
 >
   <article class="max-w-[800px] mx-auto py-8">
     <a href="/blog" class="text-text-muted no-underline text-sm inline-block mb-8 hover:text-meta-blue transition-colors">← All Posts</a>
 
-    <div class="rounded-2xl overflow-hidden border border-card-border mb-10">
-      <img src={headerImage} alt={`${post.data.title} cover`} class="w-full aspect-video object-cover block" />
-    </div>
+    {headerImage && (
+      <div class="rounded-2xl overflow-hidden border border-card-border mb-10">
+        <img src={headerImage} alt={`${post.data.title} cover`} class="w-full aspect-video object-cover block" />
+      </div>
+    )}
 
     <header class="mb-6">
       <h1 class="m-0 mb-4 text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">{post.data.title}</h1>

@@ -25,46 +25,51 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 const dates = getFileDates(project.id);
 const isUpdated = dates.published !== dates.updated;
+const slug = project.id.replace('en/', '');
 ---
 
-<Layout title={`${project.data.title} | Axomiya Indie`} lang="en">
-  <article style="max-width: 800px; margin: 0 auto; padding: 2rem 0;">
-    <a href="/projects" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: inline-block; margin-bottom: 2rem;">← All Projects</a>
+<Layout 
+  title={`${project.data.title} | Axomiya Indie`} 
+  description={project.data.description}
+  image={`https://axomiyaindie.github.io/og/projects/${slug}.png`}
+  lang="en"
+>
+  <article class="max-w-[800px] mx-auto py-8">
+    <a href="/projects" class="text-text-muted no-underline text-sm inline-block mb-8 hover:text-meta-blue transition-colors">← All Projects</a>
 
     {project.data.image && (
-      <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); margin-bottom: 2.5rem;">
-        <img src={project.data.image} alt={`${project.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;" />
+      <div class="rounded-2xl overflow-hidden border border-card-border mb-10">
+        <img src={project.data.image} alt={`${project.data.title} cover`} class="w-full aspect-video object-cover block" />
       </div>
     )}
 
-    <header style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem;">
-      <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 88px; height: 88px; border-radius: 16px; object-fit: cover; border: 2px solid var(--card-border); background: #0d0d10;" />
+    <header class="flex flex-col gap-5 mb-6">
+      <img src={project.data.logo} alt={`${project.data.title} logo`} class="w-22 h-22 rounded-2xl object-cover border-2 border-card-border bg-[#0d0d10]" />
       <div>
-        <h1 style="margin: 0 0 0.5rem 0; font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;">{project.data.title}</h1>
-        <p style="margin: 0; color: var(--text-muted); font-size: 1.05rem; line-height: 1.6;">{project.data.description}</p>
+        <h1 class="m-0 mb-2 text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">{project.data.title}</h1>
+        <p class="m-0 text-text-muted text-lg leading-relaxed">{project.data.description}</p>
       </div>
     </header>
 
-    <!-- SINGLE DATE BADGE -->
-    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; font-size: 0.85rem;">
+    <div class="flex gap-3 flex-wrap mb-10 text-sm">
       {isUpdated ? (
-        <span style="color: var(--text-muted); background: #f0f2f5; padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+        <span class="text-text-muted bg-gray-100 px-3 py-1.5 rounded-full font-semibold">
           Updated on {dates.updated}
         </span>
       ) : (
-        <span style="color: var(--accent); background: rgba(0,100,224,0.08); padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+        <span class="text-meta-blue bg-meta-blue/10 px-3 py-1.5 rounded-full font-semibold">
           Published on {dates.published}
         </span>
       )}
     </div>
 
-    <div style="margin-bottom: 2.5rem;">
-      <a href={project.data.link} target="_blank" rel="noopener" style="display: inline-block; background: var(--accent); color: white; padding: 0.85rem 1.75rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: background 0.2s;">
+    <div class="mb-10">
+      <a href={project.data.link} target="_blank" rel="noopener" class="inline-block bg-meta-blue text-white px-7 py-3 rounded-lg no-underline font-semibold text-[0.95rem] hover:bg-meta-blue-hover transition-colors">
         Visit Project →
       </a>
     </div>
 
-    <div class="prose" style="color: var(--text-main);">
+    <div class="prose">
       <Content />
     </div>
   </article>
