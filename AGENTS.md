@@ -1,22 +1,49 @@
-## Development
+Ah, that explains it! `AGENTS.md` is an AI instruction file. It tells AI coding assistants (like me, Copilot, or Cursor) how to behave when working on your project.
 
-When starting the dev server, use background mode:
+The file you pasted is the **default Astro starter** `AGENTS.md`. It's fine to keep, but since we've heavily customized your project, you should update it so future AI assistants understand your specific setup (especially that you use `pnpm`, Content Collections, and manual bilingual toggles).
 
+Here is a customized `AGENTS.md` tailored exactly to your project.
+
+### Overwrite `D:\axomiyaindie.github.io\AGENTS.md`
+
+```markdown
+# AI Agent Instructions
+
+This is an Astro project for Axomiya Indie. When making changes, follow these specific guidelines for this repository.
+
+## Development Commands
+
+This project uses **`pnpm`** (not `npm` or `yarn`).
+
+```sh
+# Start dev server (port 4321)
+pnpm run dev
+
+# Build for production
+pnpm run build
+
+# Preview production build
+pnpm run preview
 ```
-astro dev --background
+
+## Architecture & Key Files
+
+- **Content Collections:** Markdown files in `src/content/blog/` and `src/content/projects/` drive the site.
+- **Dynamic Routes:** `src/pages/projects/[slug].astro` and `src/pages/blog/[slug].astro` generate detail pages from the Markdown files.
+- **Bilingual (EN/AS):** We do *not* use Astro's built-in i18n routing. We use CSS classes: `.en-text` (English) and `.as-text` (Assamese), toggled by adding `.lang-as` to the `<body>` tag via a script in `layout.astro`.
+- **Smart Dates:** Detail pages use a Node.js script (`execSync('git log ...')`) to fetch the "Published" (first commit) and "Updated" (latest commit) dates from Git history. Only one badge shows at a time.
+- **Styling:** Pure CSS in `src/styles/global.css`. We use CSS variables for colors and `clamp()` for responsive typography.
+
+## Guidelines for Changes
+
+1. **Filenames:** All filenames and import paths **must be lowercase**. We deploy to Linux (GitHub Actions), which is case-sensitive.
+2. **Images:** Static assets (hero images, blog covers, project logos) go in the `public/` directory and are referenced with absolute paths (e.g., `/hero/jhapi.jpg`).
+3. **Git Dates:** If you modify the date logic, ensure `fetch-depth: 0` remains in `.github/workflows/deploy.yml`. Without it, Git dates will fail in CI.
+4. **Font:** The site uses **Inter** (loaded via Google Fonts in `layout.astro`).
+
+## Documentation References
+
+- [Content Collections](https://docs.astro.build/en/guides/content-collections/)
+- [Dynamic Routing](https://docs.astro.build/en/guides/routing/)
+- [Astro Components](https://docs.astro.build/en/basics/astro-components/)
 ```
-
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
-
-## Documentation
-
-Full documentation: https://docs.astro.build
-
-Consult these guides before working on related tasks:
-
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
