@@ -62,26 +62,26 @@
           <span class="as-text">ক’ড। মাত্ৰ শব্দ নহয়।<br/>প্ৰকৃত ফলাফল।</span>
         </h1>
         <p style="color: rgba(255,255,255,0.95); font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin: 0; line-height: 1.6;">
-          <span class="en-text">Building tools in the open. Follow my journey on GitHub and see what's next.</span>
-          <span class="as-text">মুকলিতভাৱে সঁজুলি নিৰ্মাণ কৰা। GitHub-ত মোৰ যাত্ৰা অনুসৰণ কৰক আৰু চাওক পৰৱৰ্তী কি।</span>
+          <span class="en-text">Building tools in the open. Follow my journey to see what's next.</span>
+          <span class="as-text">মুকলিতভাৱে সঁজুলি নিৰ্মাণ কৰা। Social Media-ত মোৰ যাত্ৰা অনুসৰণ কৰক আৰু চাওক পৰৱৰ্তী কি।</span>
         </p>
 
         <!-- SOCIAL ICONS -->
-        <div style="display: flex; gap: 1.25rem; align-items: center; margin-top: 2rem;">
+        <div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 2rem;">
           <a href="https://github.com/axomiyaindie" target="_blank" rel="noopener" class="hero-social-icon" title="GitHub">
-            <img src="/social/github.png" alt="GitHub" width="24" height="24" />
+            <img src="/social/github.png" alt="GitHub" width="20" height="20" />
           </a>
           <a href="https://www.linkedin.com/in/axomiyaindie/" target="_blank" rel="noopener" class="hero-social-icon" title="LinkedIn">
-            <img src="/social/linkedin.png" alt="LinkedIn" width="24" height="24" />
+            <img src="/social/linkedin.png" alt="LinkedIn" width="20" height="20" />
           </a>
           <a href="https://x.com/AxomiyaIndie" target="_blank" rel="noopener" class="hero-social-icon" title="X">
-            <img src="/social/x.png" alt="X" width="24" height="24" />
+            <img src="/social/x.png" alt="X" width="20" height="20" />
           </a>
           <a href="https://www.facebook.com/share/17vMFEg3Y6/" target="_blank" rel="noopener" class="hero-social-icon" title="Facebook">
-            <img src="/social/facebook.png" alt="Facebook" width="24" height="24" />
+            <img src="/social/facebook.png" alt="Facebook" width="20" height="20" />
           </a>
           <a href="https://www.youtube.com/@axomiyaindie" target="_blank" rel="noopener" class="hero-social-icon" title="YouTube">
-            <img src="/social/youtube.png" alt="YouTube" width="24" height="24" />
+            <img src="/social/youtube.png" alt="YouTube" width="20" height="20" />
           </a>
         </div>
       </div>
@@ -111,16 +111,34 @@
 </section>
 
 <style>
-  /* Make social icons white and hover effect */
-  .hero-social-icon img {
-    filter: brightness(0) invert(1); /* Forces all icons to pure white */
-    opacity: 0.7;
+  /* Styling for the social icons container */
+  .hero-social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15); /* Glassy dark background */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
   }
+
+  /* Hover effect on the button */
+  .hero-social-icon:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  /* Let the images inside stay their original color */
+  .hero-social-icon img {
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+  }
+  
   .hero-social-icon:hover img {
     opacity: 1;
-    transform: scale(1.15);
-    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.4));
   }
 </style>
 
