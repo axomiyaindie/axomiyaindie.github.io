@@ -1,5 +1,5 @@
 ---
-title: "Introducing PrepBuddy: Every Assam Exam Aspirant Deserves One Good Place to Study"
+title: "PrepBuddy"
 description: "PrepBuddy brings syllabus, practice questions, mock tests, courses, and job alerts into one place, built for Assam's exam aspirants."
 link: "https://github.com/axomiyaindie/prepbuddy"
 logo: "/projects/prepbuddy.png"

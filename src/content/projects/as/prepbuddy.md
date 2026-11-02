@@ -1,5 +1,5 @@
 ---
-title: "PrepBuddy-ৰ সৈতে পৰিচয় হওক: অসমৰ প্ৰতিজন পৰীক্ষাৰ্থী এখন ভাল পঢ়াৰ ঠাইৰ যোগ্য"
+title: "PrepBuddy"
 description: "PrepBuddy-এ পাঠ্যক্ৰম, অনুশীলনী প্ৰশ্ন, মক টেষ্ট, কোৰ্ছ আৰু চাকৰিৰ জাননী এক ঠাইত আনিছে, অসমৰ পৰীক্ষাৰ্থীসকলৰ বাবে বনোৱা।"
 link: "https://github.com/axomiyaindie/prepbuddy"
 logo: "/projects/prepbuddy.png"
