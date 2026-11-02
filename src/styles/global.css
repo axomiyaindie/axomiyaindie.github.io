@@ -1,0 +1,68 @@
+﻿/* ============================================
+   GLOBAL STYLES - Axomiya Indie
+   ============================================ */
+
+:root {
+  --bg: #09090b;
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --accent: #7C4DFF;
+  --accent-glow: rgba(124, 77, 255, 0.4);
+  --card-bg: #18181b;
+  --card-border: #27272a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0; padding: 0;
+  background-color: var(--bg);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display: flex; flex-direction: column; min-height: 100vh;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  flex: 1;
+  width: 100%;
+}
+
+/* ---------- Bilingual Toggle ---------- */
+.en-text, .as-text { transition: opacity 0.3s ease; }
+.as-text { display: none; }
+body.lang-as .en-text { display: none; }
+body.lang-as .as-text { display: block; }
+span.as-text { display: none; }
+body.lang-as span.en-text { display: none; }
+body.lang-as span.as-text { display: inline; }
+
+/* ---------- Project & Blog Card Hover ---------- */
+.project-card:hover,
+.blog-card:hover {
+  border-color: var(--accent) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px -10px var(--accent-glow);
+}
+
+.project-card:hover .glow,
+.blog-card:hover .glow {
+  opacity: 1 !important;
+}
+
+/* ---------- Social Icons ---------- */
+.social-icon {
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+.social-icon:hover {
+  opacity: 1;
+  transform: translateY(-3px) scale(1.1);
+  filter: drop-shadow(0 0 8px var(--accent));
+}
+.social-icon img {
+  filter: brightness(0) invert(1);
+}
