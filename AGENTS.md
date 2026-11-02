@@ -1,12 +1,3 @@
-Ah, that explains it! `AGENTS.md` is an AI instruction file. It tells AI coding assistants (like me, Copilot, or Cursor) how to behave when working on your project.
-
-The file you pasted is the **default Astro starter** `AGENTS.md`. It's fine to keep, but since we've heavily customized your project, you should update it so future AI assistants understand your specific setup (especially that you use `pnpm`, Content Collections, and manual bilingual toggles).
-
-Here is a customized `AGENTS.md` tailored exactly to your project.
-
-### Overwrite `D:\axomiyaindie.github.io\AGENTS.md`
-
-```markdown
 # AI Agent Instructions
 
 This is an Astro project for Axomiya Indie. When making changes, follow these specific guidelines for this repository.
