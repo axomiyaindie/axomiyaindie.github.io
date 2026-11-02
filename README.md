@@ -1,68 +1,36 @@
 # Axomiya Indie
 
-> **Building for Assam, for the Future.** 
-> An independent developer's portfolio and blog, built to make high-quality information universally accessible in Assamese and English.
+> **Building for Assam, for the Future.**
 
-## Features
+This is the personal website of **Axomiya Indie** — an independent developer from Assam. The goal is simple: use technology to make knowledge and education accessible to everyone, in both Assamese and English.
 
-- **Bilingual (English / Assamese):** One-click language toggle.
-- **Dynamic Content:** Projects and blog posts are generated from Markdown files (`src/content/`).
-- **Auto-Generated Dates:** Uses Git history to display the "Published" or "Updated" date on every post/project.
-- **Meta AI Inspired Design:** Clean, light theme, mobile-first typography (Inter font).
-- **Hero Carousel:** 3-slide animated carousel with full background images.
-- **SEO & Social Sharing:** Dynamic Open Graph images for every project and blog post.
-- **CI/CD:** Automatic deployment to GitHub Pages on every push.
+## What is this?
 
-## Tech Stack
+It's a portfolio and blog. You can explore:
 
-- **Framework:** [Astro](https://astro.build/)
-- **Styling:** Vanilla CSS (Mobile-first, CSS Variables)
-- **Font:** Inter (via Google Fonts)
-- **Deployment:** GitHub Pages + GitHub Actions
+- **Projects** I'm building (like PrepBuddy and AxomiyaGPT)
+- **Blog posts** about my journey, learning, and ideas
+- **About** page to learn more about me and connect
 
-## Project Structure
+The site works in **two languages** — English and Assamese. Just click the language button in the top right to switch. Every page has a counterpart in the other language (or, if it's still being written, a friendly message explaining that).
 
-```text
-/
-├── public/              # Static assets (logos, images, social icons)
-├── src/
-│   ├── components/      # Reusable UI (Header, Footer, Hero Carousel)
-│   ├── content/         # Markdown files for Projects and Blog
-│   │   ├── blog/        # e.g., 02-11-26-first-blog.md
-│   │   └── projects/    # e.g., prepbuddy.md
-│   ├── layouts/         # Base HTML shell & SEO tags
-│   ├── pages/           # Routing (Home, /projects, /blog, /about)
-│   ├── styles/          # Global CSS variables and typography
-│   └── utils/           # Shared logic (e.g., date formatting)
-└── package.json
-```
+## Why does this exist?
 
-## How to Add Content
+Because the internet should be available to everyone, not just English speakers. There's no reason a student in Assam should have less access to information or tools than someone anywhere else. This site is my small contribution to closing that gap.
 
-**To add a new Blog Post:**
-1. Create a file in `src/content/blog/` named `DD-MM-YY-title.md`.
-2. Add the frontmatter (`title`, `title_as`, `description`, `description_as`, `image`).
-3. Add your cover image to `public/blog/`.
-4. Write your content below the `---`.
-5. Push to GitHub.
+## What can you expect?
 
-**To add a new Project:**
-1. Create a file in `src/content/projects/` named `project-name.md`.
-2. Add the frontmatter (`title`, `title_as`, `description`, `description_as`, `link`, `logo`).
-3. Add the logo to `public/projects/`.
-4. Push to GitHub.
+- **Fast, clean design** — no ads, no trackers, no distractions
+- **Both languages, always** — you can read anything in English or Assamese
+- **Always up to date** — when I write something new, it appears immediately
+- **Open to contributions** — if you want to translate, report a mistake, or help in any way, you're welcome here. See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## Commands
+## How to reach me
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`            | Installs dependencies                            |
-| `pnpm run dev`            | Starts local dev server at `localhost:4321`      |
-| `pnpm run build`          | Build your production site to `./dist/`          |
-| `pnpm run preview`        | Preview your build locally, before deploying     |
+- Website: [axomiyaindie.github.io](https://axomiyaindie.github.io)
+- GitHub: [@axomiyaindie](https://github.com/axomiyaindie)
+- X (Twitter): [@AxomiyaIndie](https://x.com/AxomiyaIndie)
 
-## Connect
+---
 
-- **Website:** [axomiyaindie.github.io](https://axomiyaindie.github.io)
-- **GitHub:** [@axomiyaindie](https://github.com/axomiyaindie)
-- **X (Twitter):** [@AxomiyaIndie](https://x.com/AxomiyaIndie)
+*Built with love from Assam. For everyone who's been told they can't.*
