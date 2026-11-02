@@ -1,4 +1,8 @@
 ---
+export interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
 ---
 <section style="position: relative; padding: 4rem 0 5rem 0; max-width: 1000px; margin: 0 auto;">
   
@@ -14,12 +18,16 @@
       
       <div style="position: relative; z-index: 2; max-width: 600px; color: white;">
         <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin: 0 0 1.5rem 0; color: white;">
-          <span class="en-text">Building for Assam,<br/>for the Future.</span>
-          <span class="as-text">অসমৰ বাবে,<br/>ভৱিষ্যতৰ বাবে।</span>
+          {lang === 'as' ? (
+            <Fragment>অসমৰ বাবে,<br/>ভৱিষ্যতৰ বাবে।</Fragment>
+          ) : (
+            <Fragment>Building for Assam,<br/>for the Future.</Fragment>
+          )}
         </h1>
         <p style="color: rgba(255,255,255,0.95); font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin: 0; line-height: 1.6;">
-          <span class="en-text">Independent developer building AI-first tools and education platforms for the people of Assam.</span>
-          <span class="as-text">অসমৰ ৰাইজৰ বাবে AI-চালিত সঁজুলি আৰু শৈক্ষিক প্লেটফৰ্ম নিৰ্মাণ কৰা এজন স্বতন্ত্ৰ ডেভেলপাৰ।</span>
+          {lang === 'as'
+            ? 'অসমৰ ৰাইজৰ বাবে AI-চালিত সঁজুলি আৰু শৈক্ষিক প্লেটফৰ্ম নিৰ্মাণ কৰা এজন স্বতন্ত্ৰ ডেভেলপাৰ।'
+            : 'Independent developer building AI-first tools and education platforms for the people of Assam.'}
         </p>
       </div>
     </div>
@@ -32,38 +40,44 @@
       
       <div style="position: relative; z-index: 2; max-width: 600px; color: white;">
         <p style="color: #00E1FF; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
-          <span class="en-text">Empowering Students</span>
-          <span class="as-text">শিক্ষাৰ্থীক সৱলীকৰণ</span>
+          {lang === 'as' ? 'শিক্ষাৰ্থীক সৱলীকৰণ' : 'Empowering Students'}
         </p>
         <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin: 0 0 1.5rem 0; color: white;">
-          <span class="en-text">Bridging the gap in<br/>local education.</span>
-          <span class="as-text">স্থানীয় শিক্ষাৰ ব্যৱধান<br/>দূৰ কৰা।</span>
+          {lang === 'as' ? (
+            <Fragment>স্থানীয় শিক্ষাৰ ব্যৱধান<br/>দূৰ কৰা।</Fragment>
+          ) : (
+            <Fragment>Bridging the gap in<br/>local education.</Fragment>
+          )}
         </h1>
         <p style="color: rgba(255,255,255,0.95); font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin: 0; line-height: 1.6;">
-          <span class="en-text">Creating accessible, AI-driven learning tools that understand our language and culture.</span>
-          <span class="as-text">আমাৰ ভাষা আৰু সংস্কৃতি বুজি পোৱা, সুলভ আৰু AI-চালিত শিকন সঁজুলি সৃষ্টি কৰা।</span>
+          {lang === 'as'
+            ? 'আমাৰ ভাষা আৰু সংস্কৃতি বুজি পোৱা, সুলভ আৰু AI-চালিত শিকন সঁজুলি সৃষ্টি কৰা।'
+            : 'Creating accessible, AI-driven learning tools that understand our language and culture.'}
         </p>
       </div>
     </div>
 
     <!-- Slide 3 -->
     <div class="hero-slide" style="transition: opacity 0.6s ease; opacity: 0; position: absolute; inset: 0; display: none; align-items: center; padding: 3rem 2rem;">
-      <img src="/hero/tradition.jpg" alt="Assamese Tradition" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" />
+      <img src="/hero/paddy.jpg" alt="Assamese Culture" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;" />
       
       <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%); z-index: 1;"></div>
       
       <div style="position: relative; z-index: 2; max-width: 600px; color: white;">
         <p style="color: #00E1FF; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
-          <span class="en-text">Open Source</span>
-          <span class="as-text">মুকলিত উৎস</span>
+          {lang === 'as' ? 'মুকলিত উৎস' : 'Open Source'}
         </p>
         <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin: 0 0 1.5rem 0; color: white;">
-          <span class="en-text">Code. Not Noise.<br/>Real Output.</span>
-          <span class="as-text">ক’ড। মাত্ৰ শব্দ নহয়।<br/>প্ৰকৃত ফলাফল।</span>
+          {lang === 'as' ? (
+            <Fragment>ক'ড। মাত্ৰ শব্দ নহয়।<br/>প্ৰকৃত ফলাফল।</Fragment>
+          ) : (
+            <Fragment>Code. Not Noise.<br/>Real Output.</Fragment>
+          )}
         </h1>
         <p style="color: rgba(255,255,255,0.95); font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin: 0; line-height: 1.6;">
-          <span class="en-text">Building tools in the open. Follow my journey to see what's next.</span>
-          <span class="as-text">মুকলিতভাৱে সঁজুলি নিৰ্মাণ কৰা। Social Media-ত মোৰ যাত্ৰা অনুসৰণ কৰক আৰু চাওক পৰৱৰ্তী কি।</span>
+          {lang === 'as'
+            ? 'মুকলিতভাৱে সঁজুলি নিৰ্মাণ কৰা। Social Media-ত মোৰ যাত্ৰা অনুসৰণ কৰক আৰু চাওক পৰৱৰ্তী কি।'
+            : "Building tools in the open. Follow my journey to see what's next."}
         </p>
 
         <!-- SOCIAL ICONS -->
@@ -111,7 +125,6 @@
 </section>
 
 <style>
-  /* Styling for the social icons container */
   .hero-social-icon {
     display: flex;
     align-items: center;
@@ -119,24 +132,19 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15); /* Glassy dark background */
+    background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.2s ease;
     backdrop-filter: blur(4px);
   }
-
-  /* Hover effect on the button */
   .hero-social-icon:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px) scale(1.05);
   }
-
-  /* Let the images inside stay their original color */
   .hero-social-icon img {
     opacity: 0.9;
     transition: opacity 0.2s ease;
   }
-  
   .hero-social-icon:hover img {
     opacity: 1;
   }
@@ -152,37 +160,37 @@
   function showSlide(index) {
     slides.forEach((slide, i) => {
       if (i === index) {
-        slide.style.display = 'flex';
-        setTimeout(() => slide.style.opacity = '1', 50);
+        (slide as HTMLElement).style.display = 'flex';
+        setTimeout(() => (slide as HTMLElement).style.opacity = '1', 50);
       } else {
-        slide.style.opacity = '0';
-        setTimeout(() => slide.style.display = 'none', 400);
+        (slide as HTMLElement).style.opacity = '0';
+        setTimeout(() => (slide as HTMLElement).style.display = 'none', 400);
       }
     });
 
     dots.forEach((dot, i) => {
       if (i === index) {
-        dot.style.background = 'var(--accent)';
-        dot.style.opacity = '1';
-        dot.style.width = '24px';
-        dot.style.borderRadius = '4px';
+        (dot as HTMLElement).style.background = 'var(--accent)';
+        (dot as HTMLElement).style.opacity = '1';
+        (dot as HTMLElement).style.width = '24px';
+        (dot as HTMLElement).style.borderRadius = '4px';
       } else {
-        dot.style.background = 'var(--text-muted)';
-        dot.style.opacity = '0.3';
-        dot.style.width = '8px';
-        dot.style.borderRadius = '50%';
+        (dot as HTMLElement).style.background = 'var(--text-muted)';
+        (dot as HTMLElement).style.opacity = '0.3';
+        (dot as HTMLElement).style.width = '8px';
+        (dot as HTMLElement).style.borderRadius = '50%';
       }
     });
   }
 
   showSlide(0);
 
-  prevBtn.addEventListener('click', () => {
+  prevBtn!.addEventListener('click', () => {
     currentSlide = (currentSlide - 1 + slides.length) % slides.length;
     showSlide(currentSlide);
   });
 
-  nextBtn.addEventListener('click', () => {
+  nextBtn!.addEventListener('click', () => {
     currentSlide = (currentSlide + 1) % slides.length;
     showSlide(currentSlide);
   });

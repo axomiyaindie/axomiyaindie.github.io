@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    GLOBAL STYLES - Axomiya Indie (Meta AI Blog Style)
    ============================================ */
 
@@ -42,15 +42,6 @@ body {
 @media (min-width: 640px) {
   .container { padding: 3rem 2rem; }
 }
-
-/* ---------- Bilingual Toggle ---------- */
-.en-text, .as-text { transition: opacity 0.3s ease; }
-.as-text { display: none; }
-body.lang-as .en-text { display: none; }
-body.lang-as .as-text { display: block; }
-span.as-text { display: none; }
-body.lang-as span.en-text { display: none; }
-body.lang-as span.as-text { display: inline; }
 
 /* ---------- Card Hover (Subtle shadow, no glow) ---------- */
 .project-card,

@@ -2,40 +2,29 @@
 import Layout from '../../layouts/layout.astro';
 import { getCollection } from 'astro:content';
 
-// Get ALL blogs and sort newest first (handles hyphenated filenames like 02-11-26)
-const allBlogs = (await getCollection('blog')).sort((a, b) => {
-  const dateA = a.id.substring(0, 8).replace(/-/g, '');
-  const dateB = b.id.substring(0, 8).replace(/-/g, '');
-  return dateB.localeCompare(dateA);
-});
+const allBlogs = (await getCollection('blog', (p) => p.id.startsWith('en/')))
+  .map(p => ({ ...p, slug: p.id.replace('en/', '') }))
+  .sort((a, b) => {
+    const dateA = a.slug.substring(0, 8).replace(/-/g, '');
+    const dateB = b.slug.substring(0, 8).replace(/-/g, '');
+    return dateB.localeCompare(dateA);
+  });
 ---
 
-<Layout title="All Blog Posts | Axomiya Indie">
+<Layout title="All Blog Posts | Axomiya Indie" lang="en">
   <section style="padding: 4rem 0 3rem 0;">
-    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">
-      <span class="en-text">All Writing</span>
-      <span class="as-text">সকলো লিখনি</span>
-    </h1>
-    <p style="color: var(--text-muted); margin: 0; font-size: 1.1rem;">
-      <span class="en-text">Thoughts, tutorials, and updates.</span>
-      <span class="as-text">চিন্তা, টিউটোৰিয়েল, আৰু আপডেট।</span>
-    </p>
+    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">All Writing</h1>
+    <p style="color: var(--text-muted); margin: 0; font-size: 1.1rem;">Thoughts, tutorials, and updates.</p>
   </section>
 
   <div style="display: grid; gap: 1.5rem;">
     {allBlogs.map((post) => (
-      <a href={`/blog/${post.id}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+      <a href={`/blog/${post.slug}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
         <div style="display: flex; flex-direction: column; gap: 1.25rem;">
           <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px;" />
           <div>
-            <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">
-              <span class="en-text">{post.data.title}</span>
-              <span class="as-text">{post.data.title_as}</span>
-            </h3>
-            <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">
-              <span class="en-text">{post.data.description}</span>
-              <span class="as-text">{post.data.description_as}</span>
-            </p>
+            <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{post.data.title}</h3>
+            <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{post.data.description}</p>
           </div>
         </div>
       </a>

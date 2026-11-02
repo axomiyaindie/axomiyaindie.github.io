@@ -1,0 +1,74 @@
+---
+import Layout from '../../../layouts/layout.astro';
+import { getCollection, render } from 'astro:content';
+import { execSync } from 'child_process';
+import { formatDate } from '../../../utils/formatdate';
+
+export async function getStaticPaths() {
+  const blogs = await getCollection('blog', (p) => p.id.startsWith('as/'));
+  return blogs.map(post => ({
+    params: { slug: post.id.replace('as/', '') },
+    props: { post },
+  }));
+}
+
+function getFileDates(id: string) {
+  try {
+    const filePath = `src/content/blog/${id}.md`;
+    const firstCommit = execSync(`git log --diff-filter=A --follow --format=%cd --date=format:%Y-%m-%d -1 -- "${filePath}"`, { encoding: 'utf-8' }).trim();
+    const lastCommit = execSync(`git log -1 --format=%cd --date=format:%Y-%m-%d -- "${filePath}"`, { encoding: 'utf-8' }).trim();
+    return { published: formatDate(firstCommit || lastCommit), updated: formatDate(lastCommit) };
+  } catch { return { published: "N/A", updated: "N/A" }; }
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const dates = getFileDates(post.id);
+const headerImage = post.data.image || '/blog/default-blog.png';
+const isUpdated = dates.published !== dates.updated;
+---
+
+<Layout 
+  title={`${post.data.title} | Axomiya Indie`} 
+  description={post.data.description}
+  image={`https://axomiyaindie.github.io${headerImage}`}
+  lang="as"
+>
+  <article style="max-width: 800px; margin: 0 auto; padding: 2rem 0;">
+    <a href="/as/blog" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: inline-block; margin-bottom: 2rem;">← সকলো পোষ্ট</a>
+
+    <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); margin-bottom: 2.5rem;">
+      <img src={headerImage} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;" />
+    </div>
+
+    <header style="margin-bottom: 1.5rem;">
+      <h1 style="margin: 0 0 1rem 0; font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;">{post.data.title}</h1>
+      <p style="margin: 0; color: var(--text-muted); font-size: 1.05rem; line-height: 1.6;">{post.data.description}</p>
+    </header>
+
+    <!-- SINGLE DATE BADGE -->
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; font-size: 0.85rem;">
+      {isUpdated ? (
+        <span style="color: var(--text-muted); background: #f0f2f5; padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+          আপডেট কৰা হৈছে: {dates.updated}
+        </span>
+      ) : (
+        <span style="color: var(--accent); background: rgba(0,100,224,0.08); padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+          প্ৰকাশিত: {dates.published}
+        </span>
+      )}
+    </div>
+
+    <div class="prose" style="color: var(--text-main);">
+      <Content />
+    </div>
+
+    {post.data.link && (
+      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--card-border);">
+        <a href={post.data.link} target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; font-weight: 600;">
+          বাহ্যিক লিংক →
+        </a>
+      </div>
+    )}
+  </article>
+</Layout>

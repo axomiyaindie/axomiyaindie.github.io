@@ -1,13 +1,15 @@
-﻿---
+---
 export interface Props {
   title?: string;
   description?: string;
   image?: string;
+  lang?: string;
 }
 const {
   title = "Axomiya Indie",
   description = "Building for Assam, for the Future.",
-  image = "https://axomiyaindie.github.io/og-image.png"
+  image = "https://axomiyaindie.github.io/og-image.png",
+  lang = "en",
 } = Astro.props;
 
 import '../styles/global.css';
@@ -15,7 +17,7 @@ import Header from '../components/header.astro';
 import Footer from '../components/footer.astro';
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,19 +44,10 @@ import Footer from '../components/footer.astro';
     <meta property="twitter:image" content={image} />
   </head>
   <body>
-    <Header />
+    <Header lang={lang} />
     <main class="container">
       <slot />
     </main>
-    <Footer />
-
-    <script>
-      const toggleBtn = document.getElementById('lang-toggle');
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-          document.body.classList.toggle('lang-as');
-        });
-      }
-    </script>
+    <Footer lang={lang} />
   </body>
 </html>

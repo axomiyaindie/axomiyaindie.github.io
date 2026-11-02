@@ -1,0 +1,27 @@
+---
+import Layout from '../../../layouts/layout.astro';
+import { getCollection } from 'astro:content';
+const allProjects = (await getCollection('projects', (p) => p.id.startsWith('as/')))
+  .map(p => ({ ...p, slug: p.id.replace('as/', '') }))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+<Layout title="সকলো প্ৰকল্প | Axomiya Indie" lang="as">
+  <section style="padding: 4rem 0 3rem 0;">
+    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">সকলো প্ৰকল্প</h1>
+    <p style="color: var(--text-muted); margin: 0; font-size: 1.1rem;">মই এতিয়ালৈকে নিৰ্মাণ কৰা সকলো।</p>
+  </section>
+
+  <div style="display: grid; gap: 1.5rem;">
+    {allProjects.map((project) => (
+      <a href={`/as/projects/${project.slug}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+        <div style="display: flex; gap: 1.5rem; align-items: center;">
+          <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); flex-shrink: 0;" />
+          <div style="flex: 1; min-width: 0;">
+            <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{project.data.title}</h3>
+            <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{project.data.description}</p>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</Layout>

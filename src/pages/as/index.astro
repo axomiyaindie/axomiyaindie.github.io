@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/layout.astro';
+import Hero from '../../components/hero.astro';
+import { getCollection } from 'astro:content';
+import { execSync } from 'child_process';
+import { formatDate } from '../../utils/formatdate';
+
+function getFileDates(collection: string, id: string) {
+  try {
+    const filePath = `src/content/${collection}/${id}.md`;
+    const firstCommit = execSync(`git log --diff-filter=A --follow --format=%cd --date=format:%Y-%m-%d -1 -- "${filePath}"`, { encoding: 'utf-8' }).trim();
+    const lastCommit = execSync(`git log -1 --format=%cd --date=format:%Y-%m-%d -- "${filePath}"`, { encoding: 'utf-8' }).trim();
+    return { published: formatDate(firstCommit || lastCommit), updated: formatDate(lastCommit) };
+  } catch { return { published: "N/A", updated: "N/A" }; }
+}
+
+const allProjects = (await getCollection('projects', (entry) => entry.id.startsWith('as/')))
+  .map(p => ({ ...p, slug: p.id.replace('as/', ''), ...getFileDates('projects', p.id) }))
+  .sort((a, b) => new Date(b.updated.split('-').reverse().join('-')).getTime() - new Date(a.updated.split('-').reverse().join('-')).getTime());
+const latestProjects = allProjects.slice(0, 3);
+
+const allBlogs = (await getCollection('blog', (entry) => entry.id.startsWith('as/')))
+  .map(p => ({ ...p, slug: p.id.replace('as/', ''), ...getFileDates('blog', p.id) }))
+  .sort((a, b) => new Date(b.updated.split('-').reverse().join('-')).getTime() - new Date(a.updated.split('-').reverse().join('-')).getTime());
+const latestBlogs = allBlogs.slice(0, 3);
+
+const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects.length > 0 ? allProjects[0].updated : "N/A");
+---
+
+<Layout title="Axomiya Indie" lang="as">
+  
+  <!-- THE HERO CAROUSEL -->
+  <Hero lang="as" />
+
+  <!-- শেহতীয়া প্ৰকল্প -->
+  <section style="margin-bottom: 5rem;">
+    <div class="section-heading">
+      <h2>শেহতীয়া প্ৰকল্প</h2>
+      <a href="/as/projects" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">সকলো →</a>
+    </div>
+
+    <div style="display: grid; gap: 1.5rem;">
+      {latestProjects.map((project) => (
+        <a href={`/as/projects/${project.slug}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="display: flex; gap: 1.5rem; align-items: center;">
+            <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); flex-shrink: 0;" />
+            <div style="flex: 1; min-width: 0;">
+              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{project.data.title}</h3>
+              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{project.data.description}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- শেহতীয়া লিখনি -->
+  <section>
+    <div class="section-heading">
+      <h2>শেহতীয়া লিখনি</h2>
+      <a href="/as/blog" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">সকলো →</a>
+    </div>
+
+    <div style="display: grid; gap: 1.5rem;">
+      {latestBlogs.map((post) => (
+        <a href={`/as/blog/${post.slug}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px;" />
+            <div>
+              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{post.data.title}</h3>
+              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{post.data.description}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div style="text-align: center; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--card-border); font-size: 0.9rem; color: var(--text-muted);">
+    শেষ আপডেট: <strong style="color: var(--text-main);">{siteLastUpdated}</strong>
+  </div>
+</Layout>

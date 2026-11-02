@@ -1,0 +1,71 @@
+---
+import Layout from '../../../layouts/layout.astro';
+import { getCollection, render } from 'astro:content';
+import { execSync } from 'child_process';
+import { formatDate } from '../../../utils/formatdate';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', (p) => p.id.startsWith('as/'));
+  return projects.map(project => ({
+    params: { slug: project.id.replace('as/', '') },
+    props: { project },
+  }));
+}
+
+function getFileDates(id: string) {
+  try {
+    const filePath = `src/content/projects/${id}.md`;
+    const firstCommit = execSync(`git log --diff-filter=A --follow --format=%cd --date=format:%Y-%m-%d -1 -- "${filePath}"`, { encoding: 'utf-8' }).trim();
+    const lastCommit = execSync(`git log -1 --format=%cd --date=format:%Y-%m-%d -- "${filePath}"`, { encoding: 'utf-8' }).trim();
+    return { published: formatDate(firstCommit || lastCommit), updated: formatDate(lastCommit) };
+  } catch { return { published: "N/A", updated: "N/A" }; }
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const dates = getFileDates(project.id);
+const isUpdated = dates.published !== dates.updated;
+---
+
+<Layout title={`${project.data.title} | Axomiya Indie`} lang="as">
+  <article style="max-width: 800px; margin: 0 auto; padding: 2rem 0;">
+    <a href="/as/projects" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: inline-block; margin-bottom: 2rem;">← সকলো প্ৰকল্প</a>
+
+    {project.data.image && (
+      <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); margin-bottom: 2.5rem;">
+        <img src={project.data.image} alt={`${project.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;" />
+      </div>
+    )}
+
+    <header style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem;">
+      <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 88px; height: 88px; border-radius: 16px; object-fit: cover; border: 2px solid var(--card-border); background: #0d0d10;" />
+      <div>
+        <h1 style="margin: 0 0 0.5rem 0; font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;">{project.data.title}</h1>
+        <p style="margin: 0; color: var(--text-muted); font-size: 1.05rem; line-height: 1.6;">{project.data.description}</p>
+      </div>
+    </header>
+
+    <!-- SINGLE DATE BADGE -->
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; font-size: 0.85rem;">
+      {isUpdated ? (
+        <span style="color: var(--text-muted); background: #f0f2f5; padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+          আপডেট কৰা হৈছে: {dates.updated}
+        </span>
+      ) : (
+        <span style="color: var(--accent); background: rgba(0,100,224,0.08); padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+          প্ৰকাশিত: {dates.published}
+        </span>
+      )}
+    </div>
+
+    <div style="margin-bottom: 2.5rem;">
+      <a href={project.data.link} target="_blank" rel="noopener" style="display: inline-block; background: var(--accent); color: white; padding: 0.85rem 1.75rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: background 0.2s;">
+        প্ৰকল্প চাওক →
+      </a>
+    </div>
+
+    <div class="prose" style="color: var(--text-main);">
+      <Content />
+    </div>
+  </article>
+</Layout>

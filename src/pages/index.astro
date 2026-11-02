@@ -1,6 +1,6 @@
-﻿---
+---
 import Layout from '../layouts/layout.astro';
-import Hero from '../components/hero.astro'; // <-- Import the Hero
+import Hero from '../components/hero.astro';
 import { getCollection } from 'astro:content';
 import { execSync } from 'child_process';
 import { formatDate } from '../utils/formatdate';
@@ -14,49 +14,39 @@ function getFileDates(collection: string, id: string) {
   } catch { return { published: "N/A", updated: "N/A" }; }
 }
 
-const allProjects = (await getCollection('projects')).map(p => ({ ...p, ...getFileDates('projects', p.id) }))
+const allProjects = (await getCollection('projects', (entry) => entry.id.startsWith('en/')))
+  .map(p => ({ ...p, slug: p.id.replace('en/', ''), ...getFileDates('projects', p.id) }))
   .sort((a, b) => new Date(b.updated.split('-').reverse().join('-')).getTime() - new Date(a.updated.split('-').reverse().join('-')).getTime());
 const latestProjects = allProjects.slice(0, 3);
 
-const allBlogs = (await getCollection('blog')).map(p => ({ ...p, ...getFileDates('blog', p.id) }))
+const allBlogs = (await getCollection('blog', (entry) => entry.id.startsWith('en/')))
+  .map(p => ({ ...p, slug: p.id.replace('en/', ''), ...getFileDates('blog', p.id) }))
   .sort((a, b) => new Date(b.updated.split('-').reverse().join('-')).getTime() - new Date(a.updated.split('-').reverse().join('-')).getTime());
 const latestBlogs = allBlogs.slice(0, 3);
 
 const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects.length > 0 ? allProjects[0].updated : "N/A");
 ---
 
-<Layout title="Axomiya Indie">
+<Layout title="Axomiya Indie" lang="en">
   
-  <!-- THE NEW HERO CAROUSEL -->
-  <Hero />
+  <!-- THE HERO CAROUSEL -->
+  <Hero lang="en" />
 
   <!-- Latest Projects -->
   <section style="margin-bottom: 5rem;">
     <div class="section-heading">
-      <h2>
-        <span class="en-text">Latest Projects</span>
-        <span class="as-text">শেহতীয়া প্ৰকল্প</span>
-      </h2>
-      <a href="/projects" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">
-        <span class="en-text">See all →</span>
-        <span class="as-text">সকলো →</span>
-      </a>
+      <h2>Latest Projects</h2>
+      <a href="/projects" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">See all →</a>
     </div>
 
     <div style="display: grid; gap: 1.5rem;">
       {latestProjects.map((project) => (
-        <a href={`/projects/${project.id}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+        <a href={`/projects/${project.slug}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
           <div style="display: flex; gap: 1.5rem; align-items: center;">
             <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); flex-shrink: 0;" />
             <div style="flex: 1; min-width: 0;">
-              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">
-                <span class="en-text">{project.data.title}</span>
-                <span class="as-text">{project.data.title_as}</span>
-              </h3>
-              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">
-                <span class="en-text">{project.data.description}</span>
-                <span class="as-text">{project.data.description_as}</span>
-              </p>
+              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{project.data.title}</h3>
+              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{project.data.description}</p>
             </div>
           </div>
         </a>
@@ -67,30 +57,18 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
   <!-- Latest Blog Posts -->
   <section>
     <div class="section-heading">
-      <h2>
-        <span class="en-text">Latest Writing</span>
-        <span class="as-text">শেহতীয়া লিখনি</span>
-      </h2>
-      <a href="/blog" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">
-        <span class="en-text">See all →</span>
-        <span class="as-text">সকলো →</span>
-      </a>
+      <h2>Latest Writing</h2>
+      <a href="/blog" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">See all →</a>
     </div>
 
     <div style="display: grid; gap: 1.5rem;">
       {latestBlogs.map((post) => (
-        <a href={`/blog/${post.id}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
+        <a href={`/blog/${post.slug}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
           <div style="display: flex; flex-direction: column; gap: 1.25rem;">
             <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px;" />
             <div>
-              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">
-                <span class="en-text">{post.data.title}</span>
-                <span class="as-text">{post.data.title_as}</span>
-              </h3>
-              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">
-                <span class="en-text">{post.data.description}</span>
-                <span class="as-text">{post.data.description_as}</span>
-              </p>
+              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{post.data.title}</h3>
+              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{post.data.description}</p>
             </div>
           </div>
         </a>
@@ -99,8 +77,6 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
   </section>
 
   <div style="text-align: center; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--card-border); font-size: 0.9rem; color: var(--text-muted);">
-    <span class="en-text">Site last updated: </span>
-    <span class="as-text">শেষ আপডেট: </span>
-    <strong style="color: var(--text-main);">{siteLastUpdated}</strong>
+    Site last updated: <strong style="color: var(--text-main);">{siteLastUpdated}</strong>
   </div>
 </Layout>

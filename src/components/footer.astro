@@ -1,4 +1,9 @@
-﻿---
+---
+export interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const prefix = lang === 'as' ? '/as' : '';
 ---
 <footer style="border-top: 1px solid var(--card-border); padding: 3rem 1.25rem; margin-top: auto; background: #fafafa;">
   <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem;">
@@ -8,13 +13,14 @@
       
       <!-- Brand / Bio -->
       <div style="max-width: 400px;">
-        <a href="/" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; margin-bottom: 1rem;">
+        <a href={lang === 'as' ? '/as/' : '/'} style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; margin-bottom: 1rem;">
           <img src="/logo.png" alt="Axomiya Indie" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
           <span style="font-size: 1.2rem; font-weight: 800; color: var(--text-main);">Axomiya Indie</span>
         </a>
         <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-          <span class="en-text">Using AI and technology to ensure every mind in Assam has equal access to knowledge.</span>
-          <span class="as-text">AI আৰু টেকৰ জৰিয়তে অসমত সকলোলৈ সমানভাৱে তথ্য পোহৰাবলৈ কাম কৰি আছোঁ।</span>
+          {lang === 'as'
+            ? 'AI আৰু টেকৰ জৰিয়তে অসমত সকলোলৈ সমানভাৱে তথ্য পোহৰাবলৈ কাম কৰি আছোঁ।'
+            : 'Using AI and technology to ensure every mind in Assam has equal access to knowledge.'}
         </p>
       </div>
 
@@ -31,7 +37,7 @@
         <h4 style="margin: 0; font-weight: 700; color: var(--text-main); font-size: 1rem;">More</h4>
         <a href="https://www.youtube.com/@axomiyaindie" target="_blank" rel="noopener" style="color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">YouTube</a>
         <a href="https://www.facebook.com/AxomiyaIndie" target="_blank" rel="noopener" style="color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Facebook</a>
-        <a href="/about" style="color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">About</a>
+        <a href={`${prefix}/about`} style="color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">About</a>
       </div>
 
     </div>
