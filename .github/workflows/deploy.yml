@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # ← REQUIRED for git log to see full history
 
       - name: Install, build, and upload your site
         uses: withastro/action@v3
