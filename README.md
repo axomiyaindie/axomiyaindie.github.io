@@ -1,4 +1,3 @@
-```markdown
 # Axomiya Indie Portfolio
 
 > **Building for Assam, for the Future.** 
@@ -67,10 +66,3 @@
 - **Website:** [axomiyaindie.github.io](https://axomiyaindie.github.io)
 - **GitHub:** [@axomiyaindie](https://github.com/axomiyaindie)
 - **X (Twitter):** [@AxomiyaIndie](https://x.com/AxomiyaIndie)
-```
-
-### Build and Push
-
-Since `README.md` isn't part of the site build, you can just commit and push:
-
-```powershell

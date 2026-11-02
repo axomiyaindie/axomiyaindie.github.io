@@ -37,4 +37,3 @@ pnpm run preview
 - [Content Collections](https://docs.astro.build/en/guides/content-collections/)
 - [Dynamic Routing](https://docs.astro.build/en/guides/routing/)
 - [Astro Components](https://docs.astro.build/en/basics/astro-components/)
-```
