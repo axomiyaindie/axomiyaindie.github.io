@@ -23,73 +23,78 @@ import Layout from '../layouts/layout.astro';
         <span class="en-text">"Real output > empty talk. Code, not noise."</span>
         <span class="as-text">"প্ৰকৃত ফলাফল > খালী কথা। ক'ড, মাত্ৰ শব্দ নহয়।"</span>
       </blockquote>
-
-      <h2>
-        <span class="en-text">Connect with Me</span>
-        <span class="as-text">মোৰ সৈতে সংযোগ কৰক</span>
-      </h2>
-      <p>
-        <span class="en-text">Whether you want to collaborate, need help with a project, or just want to say hi, feel free to reach out on any of these platforms:</span>
-        <span class="as-text">আপুনি যদি সহযোগিতা কৰিব বিচাৰে, কোনো প্ৰকল্পত সহায়ৰ প্ৰয়োজন হয়, বা মাত্ৰ হাই ক'ব বিচাৰে, তেন্তে এই প্লেটফৰ্মসমূহৰ যিকোনো এটাত যোগাযোগ কৰিব পাৰে:</span>
-      </p>
     </div>
 
-    <!-- Social Links Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem;">
-      
-      <!-- X / Twitter -->
-      <a href="https://x.com/AxomiyaIndie" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
-        <img src="/social/x.png" alt="X" style="width: 28px; height: 28px; filter: brightness(0);" />
-        <div>
-          <div style="font-weight: 700; color: var(--text-main);">X (Twitter)</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">@AxomiyaIndie</div>
-        </div>
-      </a>
+    <!-- EMBEDS SECTION -->
+    <div style="margin-top: 4rem;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 2rem; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem;">
+        <span class="en-text">Latest from my Socials</span>
+        <span class="as-text">মোৰ ছ'চিয়েল মিডিয়াৰ পৰা শেহতীয়া</span>
+      </h2>
 
-      <!-- GitHub -->
-      <a href="https://github.com/axomiyaindie" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
-        <img src="/social/github.png" alt="GitHub" style="width: 28px; height: 28px; filter: brightness(0);" />
-        <div>
-          <div style="font-weight: 700; color: var(--text-main);">GitHub</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">@axomiyaindie</div>
+      <div style="display: flex; flex-direction: column; gap: 2.5rem;">
+        
+        <!-- X (Twitter) Embed -->
+        <div style="display: flex; justify-content: center;">
+          <blockquote class="twitter-tweet">
+            <p lang="en" dir="ltr">I have a niche problem:<br><br>I can't stick to one.<br><br>I talk about Assam.<br>AI.<br>Tech.<br>Education.<br>Culture.<br>Geopolitics.<br><br>And then I randomly disappear to build an internet tool because a problem annoyed me enough.<br><br>🧵</p>&mdash; Rakibul Islam (@AxomiyaIndie) <a href="https://x.com/AxomiyaIndie/status/2077415064693518340?ref_src=twsrc%5Etfw">July 15, 2026</a>
+          </blockquote>
+          <script is:inline async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
         </div>
-      </a>
 
-      <!-- LinkedIn -->
-      <a href="https://www.linkedin.com/in/axomiyaindie/" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
-        <img src="/social/linkedin.png" alt="LinkedIn" style="width: 28px; height: 28px; filter: brightness(0);" />
-        <div>
-          <div style="font-weight: 700; color: var(--text-main);">LinkedIn</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">Axomiya Indie</div>
+        <!-- Facebook Embed -->
+        <div style="display: flex; justify-content: center;">
+          <iframe 
+            src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FAxomiyaIndie%2Fposts%2F1172178607962715%3A1172178607962715&show_text=true&width=500" 
+            width="500" 
+            height="384" 
+            style="border:none;overflow:hidden; max-width: 100%; border-radius: 12px;" 
+            scrolling="no" 
+            frameborder="0" 
+            allowfullscreen="true" 
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+          </iframe>
         </div>
-      </a>
 
-      <!-- Facebook -->
-      <a href="https://www.facebook.com/share/17vMFEg3Y6/" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
-        <img src="/social/facebook.png" alt="Facebook" style="width: 28px; height: 28px; filter: brightness(0);" />
-        <div>
-          <div style="font-weight: 700; color: var(--text-main);">Facebook</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">Axomiya Indie</div>
+        <!-- YouTube Embed (Latest Uploads) -->
+        <div style="display: flex; justify-content: center;">
+          <div style="width: 100%; max-width: 560px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <!-- The UU prefix tells YouTube to load the "Uploads" playlist for this channel -->
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/videoseries?list=UU-rww5TgKPkC6aGJrMbP7zmw" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
-      </a>
 
-      <!-- YouTube -->
-      <a href="https://www.youtube.com/@axomiyaindie" target="_blank" rel="noopener" class="social-card" style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.2s;">
-        <img src="/social/youtube.png" alt="YouTube" style="width: 28px; height: 28px; filter: brightness(0);" />
-        <div>
-          <div style="font-weight: 700; color: var(--text-main);">YouTube</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted);">@axomiyaindie</div>
+        <!-- GitHub Card -->
+        <div style="display: flex; justify-content: center;">
+          <a href="https://github.com/axomiyaindie" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; width: 100%; max-width: 500px; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--card-border)'">
+            <img src="/social/github.png" alt="GitHub" style="width: 40px; height: 40px; filter: brightness(0);" />
+            <div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-main);">Axomiya Indie on GitHub</div>
+              <div style="font-size: 0.9rem; color: var(--text-muted);">Building open-source tools and projects</div>
+            </div>
+          </a>
         </div>
-      </a>
 
+        <!-- LinkedIn Card -->
+        <div style="display: flex; justify-content: center;">
+          <a href="https://www.linkedin.com/in/axomiyaindie/" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 1rem; padding: 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; text-decoration: none; color: inherit; width: 100%; max-width: 500px; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--card-border)'">
+            <img src="/social/linkedin.png" alt="LinkedIn" style="width: 40px; height: 40px; filter: brightness(0);" />
+            <div>
+              <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-main);">Connect on LinkedIn</div>
+              <div style="font-size: 0.9rem; color: var(--text-muted);">Professional updates and networking</div>
+            </div>
+          </a>
+        </div>
+
+      </div>
     </div>
   </article>
 </Layout>
-
-<style>
-  .social-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
-  }
-</style>
