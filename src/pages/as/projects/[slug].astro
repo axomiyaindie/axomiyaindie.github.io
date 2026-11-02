@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/layout.astro';
+import Share from '../../../components/share.astro';
 import { getCollection, render } from 'astro:content';
 import { execSync } from 'child_process';
 import { formatDate } from '../../../utils/formatdate';
@@ -81,5 +82,10 @@ const slug = project.id.replace('as/', '');
     <div class="prose">
       <Content />
     </div>
+
+    <Share 
+      title={project.data.title} 
+      url={`https://axomiyaindie.github.io/as/projects/${slug}/`} 
+    />
   </article>
 </Layout>
