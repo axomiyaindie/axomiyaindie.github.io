@@ -1,5 +1,5 @@
 ---
-title: "My First Blog Post: Why I Built This Site"
+title: "Post #1: Why I Built This Site"
 description: "Why I built my own corner of the internet, the problems I faced, and how Astro, GitHub Actions, Git history, and four AI coding assistants helped me ship it fast."
 link: "https://youtube.com/@axomiyaindie"
 image: "/blog/02-11-26-first-blog.png"
