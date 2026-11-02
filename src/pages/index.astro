@@ -1,5 +1,6 @@
 ﻿---
 import Layout from '../layouts/layout.astro';
+import Hero from '../components/hero.astro'; // <-- Import the Hero
 import { getCollection } from 'astro:content';
 import { execSync } from 'child_process';
 import { formatDate } from '../utils/formatdate';
@@ -25,20 +26,9 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
 ---
 
 <Layout title="Axomiya Indie">
-  <!-- Meta-style Editorial Hero -->
-  <section style="padding: 4rem 0 5rem 0; text-align: left; max-width: 800px;">
-    <p style="color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
-      Latest Updates
-    </p>
-    <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin: 0 0 1.5rem 0; color: var(--text-main);">
-      <span class="en-text">Building for Assam,<br/>for the Future.</span>
-      <span class="as-text">অসমৰ বাবে,<br/>ভৱিষ্যতৰ বাবে।</span>
-    </h1>
-    <p style="color: var(--text-muted); font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin: 0; line-height: 1.6; max-width: 600px;">
-      <span class="en-text">Independent developer building AI-first tools and education platforms for the people of Assam.</span>
-      <span class="as-text">অসমৰ ৰাইজৰ বাবে AI-চালিত সঁজুলি আৰু শৈক্ষিক প্লেটফৰ্ম নিৰ্মাণ কৰা এজন স্বতন্ত্ৰ ডেভেলপাৰ।</span>
-    </p>
-  </section>
+  
+  <!-- THE NEW HERO CAROUSEL -->
+  <Hero />
 
   <!-- Latest Projects -->
   <section style="margin-bottom: 5rem;">
