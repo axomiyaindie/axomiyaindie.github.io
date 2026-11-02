@@ -1,24 +1,25 @@
 ---
 import Layout from '../../../layouts/layout.astro';
 import { getCollection } from 'astro:content';
+
 const allProjects = (await getCollection('projects', (p) => p.id.startsWith('as/')))
   .map(p => ({ ...p, slug: p.id.replace('as/', '') }))
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 <Layout title="সকলো প্ৰকল্প | Axomiya Indie" lang="as">
-  <section style="padding: 4rem 0 3rem 0;">
-    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">সকলো প্ৰকল্প</h1>
-    <p style="color: var(--text-muted); margin: 0; font-size: 1.1rem;">মই এতিয়ালৈকে নিৰ্মাণ কৰা সকলো।</p>
+  <section class="py-16">
+    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-text-main mb-4">সকলো প্ৰকল্প</h1>
+    <p class="text-text-muted m-0 text-lg">মই এতিয়ালৈকে নিৰ্মাণ কৰা সকলো।</p>
   </section>
 
-  <div style="display: grid; gap: 1.5rem;">
+  <div class="grid gap-6">
     {allProjects.map((project) => (
-      <a href={`/as/projects/${project.slug}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
-        <div style="display: flex; gap: 1.5rem; align-items: center;">
-          <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); flex-shrink: 0;" />
-          <div style="flex: 1; min-width: 0;">
-            <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{project.data.title}</h3>
-            <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{project.data.description}</p>
+      <a href={`/as/projects/${project.slug}/`} class="project-card block bg-card-bg border border-card-border rounded-xl p-6 no-underline text-inherit transition-shadow hover:shadow-md">
+        <div class="flex gap-6 items-center">
+          <img src={project.data.logo} alt={`${project.data.title} logo`} class="w-18 h-18 rounded-xl object-cover border border-card-border shrink-0" />
+          <div class="flex-1 min-w-0">
+            <h3 class="m-0 mb-2 text-xl md:text-2xl font-bold text-text-main">{project.data.title}</h3>
+            <p class="m-0 text-text-muted text-base leading-relaxed">{project.data.description}</p>
           </div>
         </div>
       </a>

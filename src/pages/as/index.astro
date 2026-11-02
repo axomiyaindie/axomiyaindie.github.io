@@ -29,24 +29,23 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
 
 <Layout title="Axomiya Indie" lang="as">
   
-  <!-- THE HERO CAROUSEL -->
   <Hero lang="as" />
 
   <!-- শেহতীয়া প্ৰকল্প -->
-  <section style="margin-bottom: 5rem;">
-    <div class="section-heading">
-      <h2>শেহতীয়া প্ৰকল্প</h2>
-      <a href="/as/projects" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">সকলো →</a>
+  <section class="mb-20">
+    <div class="flex justify-between items-baseline gap-4 mb-6 border-b border-card-border pb-4 flex-wrap">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-text-main m-0">শেহতীয়া প্ৰকল্প</h2>
+      <a href="/as/projects" class="text-meta-blue no-underline text-base font-semibold hover:underline">সকলো →</a>
     </div>
 
-    <div style="display: grid; gap: 1.5rem;">
+    <div class="grid gap-6">
       {latestProjects.map((project) => (
-        <a href={`/as/projects/${project.slug}/`} class="project-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
-          <div style="display: flex; gap: 1.5rem; align-items: center;">
-            <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px solid var(--card-border); flex-shrink: 0;" />
-            <div style="flex: 1; min-width: 0;">
-              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{project.data.title}</h3>
-              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{project.data.description}</p>
+        <a href={`/as/projects/${project.slug}/`} class="project-card block bg-card-bg border border-card-border rounded-xl p-6 no-underline text-inherit transition-shadow hover:shadow-md">
+          <div class="flex gap-6 items-center">
+            <img src={project.data.logo} alt={`${project.data.title} logo`} class="w-18 h-18 rounded-xl object-cover border border-card-border shrink-0" />
+            <div class="flex-1 min-w-0">
+              <h3 class="m-0 mb-2 text-xl md:text-2xl font-bold text-text-main">{project.data.title}</h3>
+              <p class="m-0 text-text-muted text-base leading-relaxed">{project.data.description}</p>
             </div>
           </div>
         </a>
@@ -56,19 +55,19 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
 
   <!-- শেহতীয়া লিখনি -->
   <section>
-    <div class="section-heading">
-      <h2>শেহতীয়া লিখনি</h2>
-      <a href="/as/blog" style="color: var(--accent); text-decoration: none; font-size: 1rem; font-weight: 600;">সকলো →</a>
+    <div class="flex justify-between items-baseline gap-4 mb-6 border-b border-card-border pb-4 flex-wrap">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-text-main m-0">শেহতীয়া লিখনি</h2>
+      <a href="/as/blog" class="text-meta-blue no-underline text-base font-semibold hover:underline">সকলো →</a>
     </div>
 
-    <div style="display: grid; gap: 1.5rem;">
+    <div class="grid gap-6">
       {latestBlogs.map((post) => (
-        <a href={`/as/blog/${post.slug}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
-          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-            <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px;" />
+        <a href={`/as/blog/${post.slug}/`} class="blog-card block bg-card-bg border border-card-border rounded-xl p-6 no-underline text-inherit transition-shadow hover:shadow-md">
+          <div class="flex flex-col gap-5">
+            <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} class="w-full aspect-video object-cover rounded-lg" />
             <div>
-              <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{post.data.title}</h3>
-              <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{post.data.description}</p>
+              <h3 class="m-0 mb-2 text-xl md:text-2xl font-bold text-text-main">{post.data.title}</h3>
+              <p class="m-0 text-text-muted text-base leading-relaxed">{post.data.description}</p>
             </div>
           </div>
         </a>
@@ -76,7 +75,7 @@ const siteLastUpdated = allBlogs.length > 0 ? allBlogs[0].updated : (allProjects
     </div>
   </section>
 
-  <div style="text-align: center; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--card-border); font-size: 0.9rem; color: var(--text-muted);">
-    শেষ আপডেট: <strong style="color: var(--text-main);">{siteLastUpdated}</strong>
+  <div class="text-center mt-20 pt-8 border-t border-card-border text-sm text-text-muted">
+    শেষ আপডেট: <strong class="text-text-main">{siteLastUpdated}</strong>
   </div>
 </Layout>

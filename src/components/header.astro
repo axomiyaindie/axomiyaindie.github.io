@@ -6,47 +6,39 @@ const { lang = 'en' } = Astro.props;
 
 const prefix = lang === 'as' ? '/as' : '';
 
-// Smart language toggle: computes the SAME page in the other language
 let currentPath = Astro.url.pathname;
 
 let toggleHref = '/';
 if (lang === 'en') {
-  // English → Assamese: add /as to the start of the current path
   toggleHref = `/as${currentPath}`;
 } else {
-  // Assamese → English: strip /as from the start of the current path
   toggleHref = currentPath.replace(/^\/as/, '') || '/';
 }
-
-// Ensure trailing slash for consistency
 if (!toggleHref.endsWith('/') && !toggleHref.includes('.')) {
   toggleHref += '/';
 }
 
 const toggleLabel = lang === 'as' ? 'English' : 'অসমীয়া';
 ---
-<header style="position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--card-border); background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
-  <div style="max-width: 1100px; margin: 0 auto; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+<header class="sticky top-0 z-50 border-b border-card-border bg-nav-bg backdrop-blur-md">
+  <div class="max-w-[1100px] mx-auto px-5 py-4 flex justify-between items-center gap-4">
     
-    <!-- Logo + Name -->
-    <a href={lang === 'as' ? '/as/' : '/'} style="display: flex; align-items: center; gap: 0.65rem; text-decoration: none; flex-shrink: 0;">
-      <img src="/logo.png" alt="Axomiya Indie" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;" />
-      <span style="font-size: clamp(1.1rem, 3vw, 1.3rem); font-weight: 800; letter-spacing: -0.5px; color: var(--text-main);">Axomiya Indie</span>
+    <a href={lang === 'as' ? '/as/' : '/'} class="flex items-center gap-2.5 no-underline shrink-0">
+      <img src="/logo.png" alt="Axomiya Indie" class="w-8 h-8 rounded-full object-cover" />
+      <span class="text-lg md:text-xl font-extrabold tracking-tight text-text-main">Axomiya Indie</span>
     </a>
 
-    <!-- Nav + Toggle -->
-    <div style="display: flex; align-items: center; gap: 1.5rem;">
-      <nav style="display: flex; gap: 1.5rem; align-items: center;">
-        <a href={`${prefix}/projects/`} style="color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.2s;">
+    <div class="flex items-center gap-6">
+      <nav class="flex gap-6 items-center">
+        <a href={`${prefix}/projects/`} class="text-text-main no-underline text-[0.95rem] font-semibold hover:text-meta-blue transition-colors">
           {lang === 'as' ? 'প্ৰকল্প' : 'Projects'}
         </a>
-        <a href={`${prefix}/blog/`} style="color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.2s;">
+        <a href={`${prefix}/blog/`} class="text-text-main no-underline text-[0.95rem] font-semibold hover:text-meta-blue transition-colors">
           {lang === 'as' ? 'ব্লগ' : 'Blog'}
         </a>
       </nav>
 
-      <!-- Smart Language Switch Link -->
-      <a href={toggleHref} style="background: var(--accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem; white-space: nowrap; transition: background 0.2s; text-decoration: none; display: inline-block;">
+      <a href={toggleHref} class="bg-meta-blue text-white px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap hover:bg-meta-blue-hover transition-colors no-underline">
         {toggleLabel}
       </a>
     </div>

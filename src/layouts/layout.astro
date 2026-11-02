@@ -9,7 +9,7 @@ const {
   title = "Axomiya Indie",
   description = "Building for Assam, for the Future.",
   image = "https://axomiyaindie.github.io/og-image.png",
-  lang = "en",
+  lang = "en"
 } = Astro.props;
 
 import '../styles/global.css';
@@ -24,19 +24,16 @@ import Footer from '../components/footer.astro';
     <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Inter Font (Meta Optimistic-style) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
 
-    <!-- Twitter / X -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
@@ -45,7 +42,7 @@ import Footer from '../components/footer.astro';
   </head>
   <body>
     <Header lang={lang} />
-    <main class="container">
+    <main class="flex-1 w-full max-w-[1100px] mx-auto px-5 py-6 md:py-12 md:px-8">
       <slot />
     </main>
     <Footer lang={lang} />

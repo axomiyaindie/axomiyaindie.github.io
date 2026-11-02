@@ -5,13 +5,11 @@ import { getCollection } from 'astro:content';
 const path = Astro.url.pathname;
 const isAssamese = path.startsWith('/as/');
 
-// Extract the slug from the URL
 const cleanPath = path.replace(/^\/as/, '').replace(/^\/|\/$/g, '');
 const parts = cleanPath.split('/');
 
 let otherLangPath: string | null = null;
 
-// Only try to find the counterpart if it's a detail page (blog/[slug] or projects/[slug])
 if (parts.length === 2 && (parts[0] === 'blog' || parts[0] === 'projects')) {
   const [section, slug] = parts;
   const otherLang = isAssamese ? 'en' : 'as';
@@ -23,7 +21,6 @@ if (parts.length === 2 && (parts[0] === 'blog' || parts[0] === 'projects')) {
   }
 }
 
-// UI Text
 const title = isAssamese ? 'পৃষ্ঠাটো পোৱা নগ’ল' : 'Page Not Found';
 const message = otherLangPath
   ? (isAssamese 
@@ -49,33 +46,33 @@ const repoUrl = "https://github.com/axomiyaindie/axomiyaindie.github.io";
 ---
 
 <Layout title={title} lang={isAssamese ? 'as' : 'en'}>
-  <section style="text-align: center; padding: 6rem 2rem; max-width: 600px; margin: 0 auto;">
-    <h1 style="font-size: 4rem; font-weight: 800; color: var(--accent); margin: 0 0 1rem 0;">404</h1>
-    <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main);">{title}</h2>
-    <p style="color: var(--text-muted); margin-bottom: 0.5rem; font-size: 1.1rem;">{message}</p>
-    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem;">{subMessage}</p>
+  <section class="text-center py-24 px-8 max-w-[600px] mx-auto">
+    <h1 class="text-7xl md:text-8xl font-extrabold text-meta-blue mb-4">404</h1>
+    <h2 class="text-2xl font-bold text-text-main mb-4">{title}</h2>
+    <p class="text-text-muted mb-2 text-lg">{message}</p>
+    <p class="text-text-muted mb-8 text-base">{subMessage}</p>
     
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+    <div class="flex gap-4 justify-center flex-wrap mb-12">
       {btnOtherLang && (
-        <a href={otherLangPath!} style="display: inline-block; background: var(--accent); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
+        <a href={otherLangPath!} class="inline-block bg-meta-blue text-white px-6 py-3 rounded-lg no-underline font-semibold hover:bg-meta-blue-hover transition-colors">
           {btnOtherLang}
         </a>
       )}
       
-      <a href={isAssamese ? '/as/' : '/'} style="display: inline-block; background: #f0f2f5; color: var(--text-main); padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
+      <a href={isAssamese ? '/as/' : '/'} class="inline-block bg-gray-100 text-text-main px-6 py-3 rounded-lg no-underline font-semibold hover:bg-gray-200 transition-colors">
         {btnHome}
       </a>
     </div>
 
     <!-- GitHub Contribution Section -->
-    <div style="border-top: 1px solid var(--card-border); padding-top: 2rem; margin-top: 2rem;">
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+    <div class="border-t border-card-border pt-8 mt-8">
+      <p class="text-text-muted text-sm mb-4">
         {isAssamese 
           ? "আমাক অনুবাদ কৰাত সহায় কৰক, অৱদান আগবঢ়াওক, বা কোনো ভুল ধৰা পেলালে জনাওক।" 
           : "Help us translate this page, contribute, or report any mistakes."}
       </p>
-      <a href={repoUrl} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.75rem; color: white; text-decoration: none; font-weight: 600; background: var(--text-main); padding: 0.75rem 1.5rem; border-radius: 8px; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-        <img src="/social/github.png" alt="GitHub" style="width: 20px; height: 20px; filter: brightness(0) invert(1);" />
+      <a href={repoUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-3 text-white no-underline font-semibold bg-text-main px-6 py-3 rounded-lg hover:opacity-80 transition-opacity">
+        <img src="/social/github.png" alt="GitHub" class="w-5 h-5 filter brightness-0 invert" />
         View Repository on GitHub
       </a>
     </div>

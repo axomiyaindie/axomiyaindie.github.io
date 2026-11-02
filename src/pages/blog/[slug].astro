@@ -34,38 +34,37 @@ const isUpdated = dates.published !== dates.updated;
   image={`https://axomiyaindie.github.io${headerImage}`}
   lang="en"
 >
-  <article style="max-width: 800px; margin: 0 auto; padding: 2rem 0;">
-    <a href="/blog" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: inline-block; margin-bottom: 2rem;">← All Posts</a>
+  <article class="max-w-[800px] mx-auto py-8">
+    <a href="/blog" class="text-text-muted no-underline text-sm inline-block mb-8 hover:text-meta-blue transition-colors">← All Posts</a>
 
-    <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); margin-bottom: 2.5rem;">
-      <img src={headerImage} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;" />
+    <div class="rounded-2xl overflow-hidden border border-card-border mb-10">
+      <img src={headerImage} alt={`${post.data.title} cover`} class="w-full aspect-video object-cover block" />
     </div>
 
-    <header style="margin-bottom: 1.5rem;">
-      <h1 style="margin: 0 0 1rem 0; font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;">{post.data.title}</h1>
-      <p style="margin: 0; color: var(--text-muted); font-size: 1.05rem; line-height: 1.6;">{post.data.description}</p>
+    <header class="mb-6">
+      <h1 class="m-0 mb-4 text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">{post.data.title}</h1>
+      <p class="m-0 text-text-muted text-lg leading-relaxed">{post.data.description}</p>
     </header>
 
-    <!-- SINGLE DATE BADGE -->
-    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; font-size: 0.85rem;">
+    <div class="flex gap-3 flex-wrap mb-10 text-sm">
       {isUpdated ? (
-        <span style="color: var(--text-muted); background: #f0f2f5; padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+        <span class="text-text-muted bg-gray-100 px-3 py-1.5 rounded-full font-semibold">
           Updated on {dates.updated}
         </span>
       ) : (
-        <span style="color: var(--accent); background: rgba(0,100,224,0.08); padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+        <span class="text-meta-blue bg-meta-blue/10 px-3 py-1.5 rounded-full font-semibold">
           Published on {dates.published}
         </span>
       )}
     </div>
 
-    <div class="prose" style="color: var(--text-main);">
+    <div class="prose">
       <Content />
     </div>
 
     {post.data.link && (
-      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--card-border);">
-        <a href={post.data.link} target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; font-weight: 600;">
+      <div class="mt-12 pt-6 border-t border-card-border">
+        <a href={post.data.link} target="_blank" rel="noopener" class="text-meta-blue no-underline font-semibold hover:underline">
           External link →
         </a>
       </div>

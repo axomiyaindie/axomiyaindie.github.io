@@ -12,19 +12,19 @@ const allBlogs = (await getCollection('blog', (p) => p.id.startsWith('en/')))
 ---
 
 <Layout title="All Blog Posts | Axomiya Indie" lang="en">
-  <section style="padding: 4rem 0 3rem 0;">
-    <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">All Writing</h1>
-    <p style="color: var(--text-muted); margin: 0; font-size: 1.1rem;">Thoughts, tutorials, and updates.</p>
+  <section class="py-16">
+    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-text-main mb-4">All Writing</h1>
+    <p class="text-text-muted m-0 text-lg">Thoughts, tutorials, and updates.</p>
   </section>
 
-  <div style="display: grid; gap: 1.5rem;">
+  <div class="grid gap-6">
     {allBlogs.map((post) => (
-      <a href={`/blog/${post.slug}/`} class="blog-card" style="display: block; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit;">
-        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-          <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 8px;" />
+      <a href={`/blog/${post.slug}/`} class="blog-card block bg-card-bg border border-card-border rounded-xl p-6 no-underline text-inherit transition-shadow hover:shadow-md">
+        <div class="flex flex-col gap-5">
+          <img src={post.data.image || '/blog/default-blog.png'} alt={`${post.data.title} cover`} class="w-full aspect-video object-cover rounded-lg" />
           <div>
-            <h3 style="margin: 0 0 0.5rem 0; font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 700; color: var(--text-main);">{post.data.title}</h3>
-            <p style="margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.5;">{post.data.description}</p>
+            <h3 class="m-0 mb-2 text-xl md:text-2xl font-bold text-text-main">{post.data.title}</h3>
+            <p class="m-0 text-text-muted text-base leading-relaxed">{post.data.description}</p>
           </div>
         </div>
       </a>
