@@ -21,10 +21,12 @@ body {
   margin: 0; padding: 0;
   background-color: var(--bg);
   color: var(--text-main);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   display: flex; flex-direction: column; min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
@@ -128,4 +130,9 @@ body.lang-as span.as-text { display: inline; }
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 800;
   letter-spacing: -0.5px;
+}
+
+/* ---------- Font Inheritance (ensures Inter applies everywhere) ---------- */
+button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
 }
