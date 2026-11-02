@@ -1,8 +1,15 @@
 ---
 import Layout from '../../layouts/layout.astro';
 import { getCollection } from 'astro:content';
-const allBlogs = (await getCollection('blog')).sort((a, b) => b.id.localeCompare(a.id));
+
+// Get ALL blogs and sort newest first (handles hyphenated filenames like 02-11-26)
+const allBlogs = (await getCollection('blog')).sort((a, b) => {
+  const dateA = a.id.substring(0, 8).replace(/-/g, '');
+  const dateB = b.id.substring(0, 8).replace(/-/g, '');
+  return dateB.localeCompare(dateA);
+});
 ---
+
 <Layout title="All Blog Posts | Axomiya Indie">
   <section style="padding: 4rem 0 3rem 0;">
     <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 1rem 0; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">

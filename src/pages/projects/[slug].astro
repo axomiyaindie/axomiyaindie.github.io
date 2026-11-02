@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/layout.astro';
 import { getCollection, render } from 'astro:content';
+import { execSync } from 'child_process';
+import { formatDate } from '../../utils/formatdate';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -10,59 +12,74 @@ export async function getStaticPaths() {
   }));
 }
 
+function getFileDates(id: string) {
+  try {
+    const filePath = `src/content/projects/${id}.md`;
+    const firstCommit = execSync(`git log --diff-filter=A --follow --format=%cd --date=format:%Y-%m-%d -1 -- "${filePath}"`, { encoding: 'utf-8' }).trim();
+    const lastCommit = execSync(`git log -1 --format=%cd --date=format:%Y-%m-%d -- "${filePath}"`, { encoding: 'utf-8' }).trim();
+    return { published: formatDate(firstCommit || lastCommit), updated: formatDate(lastCommit) };
+  } catch { return { published: "N/A", updated: "N/A" }; }
+}
+
 const { project } = Astro.props;
 const { Content } = await render(project);
+const dates = getFileDates(project.id);
+
+// Single date badge logic
+const isUpdated = dates.published !== dates.updated;
 ---
 
 <Layout title={`${project.data.title} | Axomiya Indie`}>
-  <article style="max-width: 800px; margin: 0 auto; padding-top: 2rem;">
-    <a href="/" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">
-      <span class="en-text">← Back to Home</span>
-      <span class="as-text">← ঘৰলৈ ঘূৰি যাওক</span>
+  <article style="max-width: 800px; margin: 0 auto; padding: 2rem 0;">
+    <a href="/projects" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; display: inline-block; margin-bottom: 2rem;">
+      <span class="en-text">← All Projects</span>
+      <span class="as-text">← সকলো প্ৰকল্প</span>
     </a>
 
-    <header style="margin-top: 2rem; margin-bottom: 3rem; display: flex; align-items: center; gap: 1.5rem;">
-      <img
-        src={project.data.logo}
-        alt={`${project.data.title} logo`}
-        style="width: 96px; height: 96px; border-radius: 16px; object-fit: cover; border: 2px solid var(--card-border); background: #0d0d10; flex-shrink: 0;"
-      />
+    {project.data.image && (
+      <div style="border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); margin-bottom: 2.5rem;">
+        <img src={project.data.image} alt={`${project.data.title} cover`} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;" />
+      </div>
+    )}
+
+    <header style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem;">
+      <img src={project.data.logo} alt={`${project.data.title} logo`} style="width: 88px; height: 88px; border-radius: 16px; object-fit: cover; border: 2px solid var(--card-border); background: #0d0d10;" />
       <div>
-        <h1 style="margin: 0 0 0.5rem 0; font-size: 2.5rem; line-height: 1.2;">
+        <h1 style="margin: 0 0 0.5rem 0; font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.2; font-weight: 800; letter-spacing: -0.5px;">
           <span class="en-text">{project.data.title}</span>
           <span class="as-text">{project.data.title_as}</span>
         </h1>
-        <p style="margin: 0; color: var(--text-muted);">
+        <p style="margin: 0; color: var(--text-muted); font-size: 1.05rem; line-height: 1.6;">
           <span class="en-text">{project.data.description}</span>
           <span class="as-text">{project.data.description_as}</span>
         </p>
       </div>
     </header>
 
-    <div style="margin-bottom: 2rem;">
-      <a
-        href={project.data.link}
-        target="_blank"
-        rel="noopener"
-        style="display: inline-block; background: var(--accent); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600;"
-      >
+    <!-- SINGLE DATE BADGE -->
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; font-size: 0.85rem;">
+      {isUpdated ? (
+        <span style="color: var(--text-muted); background: #f0f2f5; padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+          <span class="en-text">Updated on </span><span class="as-text">আপডেট কৰা হৈছে: </span>
+          {dates.updated}
+        </span>
+      ) : (
+        <span style="color: var(--accent); background: rgba(0,100,224,0.08); padding: 0.35rem 0.75rem; border-radius: 20px; font-weight: 600;">
+          <span class="en-text">Published on </span><span class="as-text">প্ৰকাশিত: </span>
+          {dates.published}
+        </span>
+      )}
+    </div>
+
+    <div style="margin-bottom: 2.5rem;">
+      <a href={project.data.link} target="_blank" rel="noopener" style="display: inline-block; background: var(--accent); color: white; padding: 0.85rem 1.75rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: background 0.2s;">
         <span class="en-text">Visit Project →</span>
         <span class="as-text">প্ৰকল্প চাওক →</span>
       </a>
     </div>
 
-    <div class="prose" style="color: var(--text-main); line-height: 1.8;">
+    <div class="prose" style="color: var(--text-main);">
       <Content />
     </div>
   </article>
-
-  <style is:global>
-    .prose h1, .prose h2, .prose h3 { color: var(--text-main); margin-top: 2rem; margin-bottom: 1rem; }
-    .prose p { margin-bottom: 1rem; }
-    .prose a { color: var(--accent); text-decoration: underline; }
-    .prose code { background: var(--card-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
-    .prose pre { background: var(--card-bg); padding: 1rem; border-radius: 8px; overflow-x: auto; }
-    .prose ul, .prose ol { margin-bottom: 1rem; padding-left: 2rem; }
-    .prose img { max-width: 100%; border-radius: 8px; }
-  </style>
 </Layout>
