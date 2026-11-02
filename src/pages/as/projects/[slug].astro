@@ -15,16 +15,25 @@ export async function getStaticPaths() {
 function getFileDates(id: string) {
   try {
     const filePath = `src/content/projects/${id}.md`;
+    
     const firstCommit = execSync(`git log --diff-filter=A --follow --format=%cd --date=format:%Y-%m-%d -1 -- "${filePath}"`, { encoding: 'utf-8' }).trim();
     const lastCommit = execSync(`git log -1 --format=%cd --date=format:%Y-%m-%d -- "${filePath}"`, { encoding: 'utf-8' }).trim();
-    return { published: formatDate(firstCommit || lastCommit), updated: formatDate(lastCommit) };
-  } catch { return { published: "N/A", updated: "N/A" }; }
+    const commitCount = parseInt(execSync(`git rev-list --count HEAD -- "${filePath}"`, { encoding: 'utf-8' }).trim());
+
+    return { 
+      published: formatDate(firstCommit || lastCommit), 
+      updated: formatDate(lastCommit),
+      hasBeenUpdated: commitCount > 1
+    };
+  } catch { 
+    return { published: "N/A", updated: "N/A", hasBeenUpdated: false }; 
+  }
 }
 
 const { project } = Astro.props;
 const { Content } = await render(project);
 const dates = getFileDates(project.id);
-const isUpdated = dates.published !== dates.updated;
+const isUpdated = dates.hasBeenUpdated;
 const slug = project.id.replace('as/', '');
 ---
 
