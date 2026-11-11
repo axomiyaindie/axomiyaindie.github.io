@@ -34,7 +34,6 @@ Second, I believe the internet should be for everyone, not just English speakers
 
 - **PrepBuddy** — an AI-first learning platform for students in Assam
 - **AxomiyaGPT** — an AI assistant that actually understands Assamese
-- **Asomiya Quiz** — a quiz platform that 1,000+ students have already signed up for
 - **Education Platform** — equal access to learning resources for everyone in Assam
 - **Interactive Learning Game** — skill-building through play
 - **And more to come** — new projects are added here as I build them
