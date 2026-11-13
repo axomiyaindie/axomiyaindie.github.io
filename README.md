@@ -1,8 +1,4 @@
-# Axomiya Indie
-
-> **Building for Assam, for the Future.**
-
-Hey, I'm from Assam. This is my personal corner of the internet, where I write down my thoughts, share what I'm building, and document the journey of an independent developer trying to make a difference.
+Hey, this is my personal corner of the internet, where I write down my thoughts, share what I'm building, and document the journey of an independent developer trying to make a difference.
 
 ## What is this?
 
